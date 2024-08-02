@@ -1,27 +1,45 @@
 <div class="form-group">
-     <label class="col-sm-2 control-label">Nama Perusahaan</label>
+     <label class="col-sm-2 control-label">Kode Pelanggan</label>
      <div class="col-sm-4">
-         {!! Form::text('nama', null, ['class'=>'form-control','Placeholder'=>'Nama Perusahaan']) !!}
+         {!! Form::text('kode', null, ['class'=>'form-control','Placeholder'=>'Kode Pelanggan']) !!}
      </div>
 </div>
 <div class="form-group">
-     <label class="col-sm-2 control-label">Email Perusahaan</label>
+     <label class="col-sm-2 control-label">Nama Lengkap</label>
      <div class="col-sm-4">
-         {!! Form::text('email', null, ['class'=>'form-control','Placeholder'=>'email@example.com']) !!}
+         {!! Form::text('nama', null, ['class'=>'form-control','Placeholder'=>'Nama Lengkap']) !!}
      </div>
 </div>
 <div class="form-group">
-     <label class="col-sm-2 control-label">Website</label>
+     <label class="col-sm-2 control-label">No HP</label>
      <div class="col-sm-4">
-         {!! Form::text('website', null, ['class'=>'form-control','Placeholder'=>'example.com']) !!}
+         {!! Form::text('no_hp', null, ['class'=>'form-control','Placeholder'=>'08 / 62']) !!}
      </div>
 </div>
-{{-- <div class="form-group">
-     <label class="col-sm-2 control-label">Logo</label>
+<div class="form-group">
+     <label class="col-sm-2 control-label">Desa</label>
      <div class="col-sm-4">
-         {!! Form::file('logo', null, ['class'=>'form-control']) !!}
+         {!! Form::text('desa', null, ['class'=>'form-control','Placeholder'=>'Desa']) !!}
      </div>
-</div> --}}
+</div>
+<div class="form-group">
+     <label class="col-sm-2 control-label">RT</label>
+     <div class="col-sm-4">
+         {!! Form::text('rt', null, ['class'=>'form-control','Placeholder'=>'RT']) !!}
+     </div>
+</div>
+<div class="form-group">
+     <label class="col-sm-2 control-label">RW</label>
+     <div class="col-sm-4">
+         {!! Form::text('rw', null, ['class'=>'form-control','Placeholder'=>'RW']) !!}
+     </div>
+</div>
+<div class="form-group">
+     <label class="col-sm-2 control-label">Status</label>
+     <div class="col-sm-4">
+         {!! Form::select('status',['Aktif'=>'Aktif', 'Tidak Aktif'=>'Tidak Aktif'], null, ['class'=>'form-control']) !!}
+     </div>
+</div>
 <div class="form-group">
      <div class="col-sm-offset-2 col-sm-10">
          <button type="submit" class="btn btn-success btn btn-sm"><i class="fa fa-save" aria-hidden="true"></i> Simpan</button>

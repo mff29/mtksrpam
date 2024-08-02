@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('kode');
             $table->string('nama');
-            $table->string('no_hp');
+            $table->string('no_hp')->nullable();
             $table->string('desa');
             $table->string('rt');
             $table->string('rw');

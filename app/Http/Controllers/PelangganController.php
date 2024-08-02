@@ -3,15 +3,33 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pelanggan;
+use Yajra\DataTables\Facades\DataTables;
 
 class PelangganController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            return DataTables::of(Pelanggan::all())
+            ->addColumn('action', function ($row) {
+                $btn = "<a href='/pelanggan/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'><i class='fa fa-edit'></i></a>";
+                $btn .= '<button type="button" onclick="alert_delete(\'' . $row->id . '\')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
+                // $btn .= '<a class="btn btn-danger btn-sm" href="/pelanggan/' . $row->id . '/edit"><i class="fa fa-eye"></i></a>';
+                return $btn;
+            })
+            ->addColumn('logo', function($row){
+                $logo = asset('logo/' . $row->logo); // Sesuaikan path gambar
+                return '<img src="'.$logo.'" width="75px"/>';
+            })
+            ->rawColumns(['action','code','logo'])
+            ->addIndexColumn()
+            ->make(true);
+        }
+        return view('pelanggan.index');
     }
 
     /**
@@ -19,7 +37,7 @@ class PelangganController extends Controller
      */
     public function create()
     {
-        //
+        return view('pelanggan.create');
     }
 
     /**
@@ -27,7 +45,20 @@ class PelangganController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kode'  => 'required|unique:pelanggan',
+            'nama'  => 'required',
+            'no_hp'  => 'required',
+            'desa'  => 'required',
+            'rt'  => 'required',
+            'rw'  => 'required',
+            'status'  => 'required',
+        ]);
+
+        $data = Pelanggan::create($request->all());
+        $data->save();
+
+        return redirect(route('pelanggan.index'))->with('message','Data Pelanggan berhasil disimpan!');
     }
 
     /**
@@ -43,7 +74,8 @@ class PelangganController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['pelanggan'] = Pelanggan::findOrFail($id);
+        return view('pelanggan.edit',$data);
     }
 
     /**
@@ -51,7 +83,20 @@ class PelangganController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'kode'  => 'required',
+            'nama'  => 'required',
+            'no_hp'  => 'required',
+            'desa'  => 'required',
+            'rt'  => 'required',
+            'rw'  => 'required',
+            'status'  => 'required',
+        ]);
+
+        $pelanggan = Pelanggan::findOrFail($id);
+        $pelanggan->update($request->all());
+
+        return redirect(route('pelanggan.index'))->with('message','Data Pelanggan berhasil di Perbarui!');
     }
 
     /**
@@ -59,6 +104,7 @@ class PelangganController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pelanggan = Pelanggan::findOrFail($id);
+        return $pelanggan->delete();
     }
 }

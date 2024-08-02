@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Tambah Perusahaan')
+@section('title','Tambah Pelanggan')
 @section('content')
      <div class="content-wrapper">
           <section class="content">
@@ -7,12 +7,12 @@
                <div class="col-12">
                     <div class="card mt-3">
                          <div class="card-header">
-                              <h3 class="card-title">TAMBAH DATA PERUSAHAAN</h3>
+                              <h3 class="card-title">TAMBAH DATA PELANGGAN</h3>
                          </div>
                          <div class="card-body">
-                              {!! Form::open(['route'=>'perusahaan.store','class'=>'form-horizontal','enctype'=>'multipart/form-data']) !!}
+                              {!! Form::open(['route'=>'pelanggan.store','class'=>'form-horizontal','enctype'=>'multipart/form-data']) !!}
                               @include('validation_error')
-                              @include('perusahaan.form')
+                              @include('pelanggan.form')
                               {!! Form::close() !!}
                          </div>
                     </div>

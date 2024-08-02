@@ -30,8 +30,11 @@
                                                   <th>Kode</th>
                                                   <th>Nama Pelanggan</th>
                                                   <th>No HP</th>
-                                                  <th>esa</th>
-                                                  <th width="128">#</th>
+                                                  <th>Desa</th>
+                                                  <th>RT</th>
+                                                  <th>RW</th>
+                                                  <th>Status</th>
+                                                  <th width="90">#</th>
                                              </tr>
                                         </thead>
                                    </table>
@@ -62,10 +65,13 @@
             ajax: '/pelanggan',
             columns: [
                 {data: 'DT_RowIndex', orderable: false, searchable: false},
+                { data: 'kode', name: 'kode' },
                 { data: 'nama', name: 'nama' },
-                { data: 'email', name: 'email' },
-                { data: 'logo', name: 'logo', orderable: false, searchable: false },
-                { data: 'website', name: 'website' },
+                { data: 'no_hp', name: 'no_hp' },
+                { data: 'desa', name: 'desa' },
+                { data: 'rt', name: 'rt' },
+                { data: 'rw', name: 'rw' },
+                { data: 'status', name: 'status' },
                 { data: 'action', name: 'action' }
             ]
         });
