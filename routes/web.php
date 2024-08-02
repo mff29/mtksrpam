@@ -21,3 +21,4 @@ Route::get('/dashboard', function () {
 });
 
 Route::resource('/pelanggan', 'App\Http\Controllers\PelangganController');
+Route::resource('/asset', 'App\Http\Controllers\AssetController');

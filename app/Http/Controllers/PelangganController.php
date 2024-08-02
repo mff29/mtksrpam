@@ -21,11 +21,7 @@ class PelangganController extends Controller
                 // $btn .= '<a class="btn btn-danger btn-sm" href="/pelanggan/' . $row->id . '/edit"><i class="fa fa-eye"></i></a>';
                 return $btn;
             })
-            ->addColumn('logo', function($row){
-                $logo = asset('logo/' . $row->logo); // Sesuaikan path gambar
-                return '<img src="'.$logo.'" width="75px"/>';
-            })
-            ->rawColumns(['action','code','logo'])
+            ->rawColumns(['action','code'])
             ->addIndexColumn()
             ->make(true);
         }
