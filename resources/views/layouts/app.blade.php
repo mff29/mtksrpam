@@ -16,6 +16,11 @@
   {{-- DataTables --}}
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css" />
   <script src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
+  <style>
+    .main-sidebar {
+            box-shadow: none !important;
+        }
+  </style>
   
   @stack('css')
 </head>
@@ -65,6 +70,19 @@
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="{{ asset('adminlte/plugins/chart.js/Chart.min.js') }}"></script>
+<script>
+  function realClock() {
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const seconds = now.getSeconds().toString().padStart(2, '0');
+      const timeString = `${hours}:${minutes}:${seconds}`;
+      document.getElementById('clock').textContent = timeString;
+  }
+
+  setInterval(realClock, 1000); // real every second
+  realClock(); // Initial call to display the clock immediately
+</script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('adminlte/dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
