@@ -20,7 +20,17 @@
                                    </div>
                               </div>
                               <div class="card-body">
-                                   <a href="{{route('pelanggan.create')}}" class="btn btn-info btn-social btn-flat"><i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a>
+                                   {{-- <a href="{{route('pelanggan.create')}}" class="btn btn-info btn-social btn-flat"><i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a>
+                                   <a href="/pelanggan/export-excel" class="btn btn-success"><i class="fa fa-file-excel" aria-hidden="true"></i></a> --}}
+                                   <div class="d-flex justify-content-between mb-3">
+                                        <a href="{{route('pelanggan.create')}}" class="btn btn-info btn-social">
+                                             <i class="fa fa-plus" aria-hidden="true"></i> Tambah Data
+                                        </a>
+                                        <div>
+                                             <a href="/pelanggan/export-excel" class="btn btn-success mr-1"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
+                                             <a href="/pelanggan/export-pdf" class="btn btn-danger"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
+                                         </div>
+                                   </div>
                                    <hr>
                                    @include('alert')
                                    <table class="table table-bordered table-striped" id="pelanggan-table">
@@ -72,7 +82,7 @@
                 { data: 'rt', name: 'rt' },
                 { data: 'rw', name: 'rw' },
                 { data: 'status', name: 'status' },
-                { data: 'action', name: 'action' }
+                { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
         });
     });

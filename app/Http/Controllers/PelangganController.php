@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pelanggan;
 use Yajra\DataTables\Facades\DataTables;
+use App\Exports\PelangganExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PelangganController extends Controller
 {
@@ -102,5 +104,11 @@ class PelangganController extends Controller
     {
         $pelanggan = Pelanggan::findOrFail($id);
         return $pelanggan->delete();
+    }
+
+    public function export_excel(){
+        date_default_timezone_set('Asia/Jakarta');
+        $now = date("Y-m-d H:i:s");
+        return Excel::download(new PelangganExport, 'pelanggan '. $now .'.xlsx');
     }
 }

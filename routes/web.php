@@ -20,5 +20,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
+Route::get('/pelanggan/export-excel', 'App\Http\Controllers\PelangganController@export_excel')->name('pelanggan.export_excel');
 Route::resource('/pelanggan', 'App\Http\Controllers\PelangganController');
 Route::resource('/asset', 'App\Http\Controllers\AssetController');
