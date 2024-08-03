@@ -23,44 +23,34 @@
 @endsection
 @push('scripts')
 <script>
-     document.addEventListener('DOMContentLoaded', function () {
-         // Pilih elemen select pelanggan_id
-         const pelangganSelect = document.querySelector('select[name="pelanggan_id"]');
-         
-         // Tambahkan event listener untuk perubahan pada select
-         pelangganSelect.addEventListener('change', function () {
-             // Ambil id pelanggan yang dipilih
-             const pelangganId = this.value;
-             
-             // Jika pelangganId tidak kosong
-             if (pelangganId) {
-                 // Lakukan request AJAX untuk mendapatkan meter_akhir
-                 fetch(`/getLastMeterAkhir/${pelangganId}`)
-                     .then(response => response.json())
-                     .then(data => {
-                         // Isi field meter_awal dengan meter_akhir dari response, jika null atau undefined, set 0
-                         document.querySelector('input[name="meter_awal"]').value = data.meter_akhir !== null ? data.meter_akhir : 0;
-                     })
-                     .catch(error => {
-                         console.error('Error:', error);
-                     });
-             } else {
-                 // Kosongkan field meter_awal jika tidak ada pelanggan yang dipilih
-                 document.querySelector('input[name="meter_awal"]').value = 0;
-             }
-         });
-     });
-     </script>
-     
+        document.addEventListener('DOMContentLoaded', function () {
+            const pelangganSelect = document.querySelector('select[name="pelanggan_id"]');
+            pelangganSelect.addEventListener('change', function () {
+                const pelangganId = this.value;
+                if (pelangganId) {
+                    fetch(`/getLastMeterAkhir/${pelangganId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            document.querySelector('input[name="meter_awal"]').value = data.meter_akhir !== null ? data.meter_akhir : 0;
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                } else {
+                    document.querySelector('input[name="meter_awal"]').value = 0;
+                }
+            });
+        });
+</script>
 
 <script type="text/javascript">
-     $(document).ready(function() {
-         $('.awal, .akhir').on('input', function() {
-             var awal = $('.awal').val();
-             var akhir = $('.akhir').val();
-             var jumlah = akhir - awal;
-             $('.pakai').val(jumlah);
-         });
-     });
- </script>
+        $(document).ready(function() {
+            $('.awal, .akhir').on('input', function() {
+                var awal = $('.awal').val();
+                var akhir = $('.akhir').val();
+                var jumlah = akhir - awal;
+                $('.pakai').val(jumlah);
+            });
+        });
+</script>
 @endpush
