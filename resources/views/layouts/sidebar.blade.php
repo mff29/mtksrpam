@@ -44,62 +44,28 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                  Menu
-                  <i class="right fas fa-angle-left"></i>
-                </p>
+              <a href="{{ url('pelanggan') }}" class="nav-link">
+                <i class="fa fa-users nav-icon"></i>
+                <p>Data Pelanggan</p>
               </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{ url('pelanggan') }}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Data Pelanggan</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ url('abonemen') }}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Abonemen</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="./index3.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Dashboard v3</p>
-                  </a>
-                </li>
-              </ul>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                  Inventaris
-                  <i class="right fas fa-angle-left"></i>
-                </p>
+              <a href="{{ url('abonemen') }}" class="nav-link">
+                <i class="fa fa-tag nav-icon"></i>
+                <p>Abonemen</p>
               </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="{{ url('asset') }}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Asset</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ url('bank') }}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Bank</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="./index3.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Dashboard v3</p>
-                  </a>
-                </li>
-              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('asset') }}" class="nav-link">
+                <i class="fa fa-database nav-icon"></i>
+                <p>Asset</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('bank') }}" class="nav-link">
+                <i class="fa fa-wallet nav-icon"></i>
+                <p>Bank Accounts</p>
+              </a>
             </li>
           </ul>
         </nav>
