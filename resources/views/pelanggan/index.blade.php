@@ -20,8 +20,6 @@
                                    </div>
                               </div>
                               <div class="card-body">
-                                   {{-- <a href="{{route('pelanggan.create')}}" class="btn btn-info btn-social btn-flat"><i class="fa fa-plus" aria-hidden="true"></i> Tambah Data</a>
-                                   <a href="/pelanggan/export-excel" class="btn btn-success"><i class="fa fa-file-excel" aria-hidden="true"></i></a> --}}
                                    <div class="d-flex justify-content-between mb-3">
                                         <a href="{{route('pelanggan.create')}}" class="btn btn-info btn-social">
                                              <i class="fa fa-plus" aria-hidden="true"></i> Tambah Data

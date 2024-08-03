@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Asset;
+use App\Models\Abonemen;
 use Yajra\DataTables\Facades\DataTables;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\AssetExport;
+use App\Exports\AbonemenExport;
 
-class AssetController extends Controller
+class AbonemenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class AssetController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            return DataTables::of(Asset::all())
+            return DataTables::of(Abonemen::all())
             ->addColumn('action', function($row){
-                $btn = "<a href='/asset/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'><i class='fa fa-edit'></i></a>";
+                $btn = "<a href='/abonemen/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'><i class='fa fa-edit'></i></a>";
                 $btn .= '<button type="button" onclick="alert_delete(\'' . $row->id . '\')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                 return $btn;
             })
@@ -27,7 +27,7 @@ class AssetController extends Controller
             ->make(true);
         }
         
-        return view('asset.index');
+        return view('abonemen.index');
     }
 
     /**
@@ -35,7 +35,7 @@ class AssetController extends Controller
      */
     public function create()
     {
-        return view('asset.create');
+        return view('abonemen.create');
     }
 
     /**
@@ -44,17 +44,16 @@ class AssetController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
+            'level' => 'required',
             'harga' => 'required',
-            'kategori' => 'required',
-            'qty' => 'required',
-            'jumlah' => 'required',
+            'administrasi' => 'required',
+            'keterlambatan' => 'required',
         ]);
 
-        $data = Asset::create($request->all());
+        $data = Abonemen::create($request->all());
         $data->save();
 
-        return redirect(route('asset.index'));
+        return redirect(route('abonemen.index'));
     }
 
     /**
@@ -70,8 +69,8 @@ class AssetController extends Controller
      */
     public function edit(string $id)
     {
-        $data['asset'] = Asset::findOrFail($id);
-        return view('asset.edit',$data);
+        $data['abonemen'] = Abonemen::findOrFail($id);
+        return view('abonemen.edit',$data);
     }
 
     /**
@@ -80,17 +79,16 @@ class AssetController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama' => 'required',
+            'level' => 'required',
             'harga' => 'required',
-            'kategori' => 'required',
-            'qty' => 'required',
-            'jumlah' => 'required',
+            'administrasi' => 'required',
+            'keterlambatan' => 'required',
         ]);
 
-        $asset = asset::findOrFail($id);
-        $asset->update($request->all());
+        $data = Abonemen::findOrFail($id);
+        $data->update($request->all());
 
-        return redirect(route('asset.index'));
+        return redirect(route('abonemen.index'));
     }
 
     /**
@@ -98,13 +96,13 @@ class AssetController extends Controller
      */
     public function destroy(string $id)
     {
-        $asset = Asset::findOrFail($id);
-        return $asset->delete();
+        $abonemen = Abonemen::findOrFail($id);
+        return $abonemen->delete();
     }
 
     public function export_excel(){
         date_default_timezone_set('Asia/Jakarta');
         $now = date("Y-m-d H:i:s");
-        return Excel::download(new AssetExport, 'Asset '. $now .'.xlsx');
+        return Excel::download(new AbonemenExport, 'Abonemen '. $now .'.xlsx');
     }
 }

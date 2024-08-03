@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Asset')
+@section('title','Abonemen')
 @section('content')
 <div class="content-wrapper">
      <!-- Main content -->
@@ -9,7 +9,7 @@
                     <div class="col-12">
                          <div class="card mt-3">
                               <div class="card-header">
-                                   <h3 class="card-title">DATA ASSET</h3>
+                                   <h3 class="card-title">DATA ABONEMEN</h3>
                                    <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                              <i class="fas fa-minus"></i>
@@ -18,28 +18,24 @@
                               </div>
                               <div class="card-body">
                                    <div class="d-flex justify-content-between mb-3">
-                                        <a href="{{route('asset.create')}}" class="btn btn-info btn-social">
+                                        <a href="{{route('abonemen.create')}}" class="btn btn-info btn-social">
                                              <i class="fa fa-plus" aria-hidden="true"></i> Tambah Data
                                         </a>
                                         <div>
-                                             <a href="/asset/export-excel" class="btn btn-success mr-1"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
-                                             <a href="/asset/export-pdf" class="btn btn-danger"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
+                                             <a href="/abonemen/export-excel" class="btn btn-success mr-1"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
+                                             <a href="/abonemen/export-pdf" class="btn btn-danger"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
                                         </div>
                                    </div>
                                    <hr>
                                    @include('alert')
-                                   <table class="table table-bordered table-striped" id="asset-table">
+                                   <table class="table table-bordered table-striped" id="abonemen-table">
                                         <thead>
                                              <tr>
                                                   <th width="10">No</th>
-                                                  <th>Nama Asset</th>
-                                                  <th>Kategori</th>
+                                                  <th>Level</th>
                                                   <th>Harga</th>
-                                                  <th>Qty</th>
-                                                  <th>Satuan</th>
-                                                  <th>Jumlah</th>
-                                                  <th>Tgl</th>
-                                                  <th>Keterangan</th>
+                                                  <th>Administrasi</th>
+                                                  <th>Keterlambatan</th>
                                                   <th width="90">#</th>
                                              </tr>
                                         </thead>
@@ -65,20 +61,16 @@
 
 <script type="text/javascript">
      $(function() {
-        $('#asset-table').DataTable({
+        $('#abonemen-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '/asset',
+            ajax: '/abonemen',
             columns: [
                 {data: 'DT_RowIndex', orderable: false, searchable: false},
-                { data: 'nama', name: 'nama' },
-                { data: 'kategori', name: 'kategori' },
+                { data: 'level', name: 'level' },
                 { data: 'harga', name: 'harga' },
-                { data: 'satuan', name: 'satuan' },
-                { data: 'qty', name: 'qty' },
-                { data: 'jumlah', name: 'jumlah' },
-                { data: 'tgl_beli', name: 'tgl_beli' },
-                { data: 'keterangan', name: 'keterangan' },
+                { data: 'administrasi', name: 'administrasi' },
+                { data: 'keterlambatan', name: 'keterlambatan' },
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
         });
@@ -101,7 +93,7 @@
                     $.ajax({
                          type: "DELETE",
                          data:{ _token: '{{csrf_token()}}'},
-                         url: "/asset/" + dataId, // Ganti dengan URL yang sesuai
+                         url: "/abonemen/" + dataId, // Ganti dengan URL yang sesuai
                          success: function(response) {
                               swal({
                                    title: "Sukses",
