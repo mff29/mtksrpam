@@ -29,3 +29,5 @@ Route::resource('/abonemen', 'App\Http\Controllers\AbonemenController');
 Route::get('/bank/export-excel', 'App\Http\Controllers\BankController@export_excel')->name('bank.export_excel');
 Route::resource('/bank', 'App\Http\Controllers\BankController');
 Route::resource('/pemakaian', 'App\Http\Controllers\PemakaianController');
+
+Route::get('/getLastMeterAkhir/{pelanggan_id}', 'App\Http\Controllers\PemakaianController@getLastMeterAkhir')->name('getLastMeterAkhir');

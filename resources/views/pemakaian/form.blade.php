@@ -19,7 +19,7 @@
 <div class="form-group">
      <label class="col-sm-2 control-label">Meter Awal</label>
      <div class="col-sm-4">
-         {!! Form::number('meter_awal', null, ['class'=>'awal form-control','Placeholder'=>'Meter Awal']) !!}
+         {!! Form::number('meter_awal', null, ['class'=>'awal form-control','Placeholder'=>'Meter Awal', 'readonly']) !!}
      </div>
 </div>
 <div class="form-group">

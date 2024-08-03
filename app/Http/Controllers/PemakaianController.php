@@ -29,6 +29,15 @@ class PemakaianController extends Controller
         return view('pemakaian.index');
     }
 
+    public function getLastMeterAkhir($pelanggan_id)
+    {
+        // Ambil data terakhir untuk pelanggan yang dipilih
+        $lastData = Pemakaian::where('pelanggan_id', $pelanggan_id)->latest()->first();
+        // Jika data ada, kembalikan meter_akhir, jika tidak, kembalikan null
+        $meter_akhir = $lastData ? $lastData->meter_akhir : 0;
+
+        return response()->json(['meter_akhir' => $meter_akhir]);
+    }
     /**
      * Show the form for creating a new resource.
      */
