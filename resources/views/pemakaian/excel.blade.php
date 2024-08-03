@@ -11,7 +11,7 @@
      @foreach($pemakaian as $p)
          <tr>
              <td>{{$loop->iteration }}</td>
-             <td>{{ $p->nama}}</td>
+             <td>{{ $p->pelanggan->nama}}</td>
              <td>{{ $p->bulan}}</td>
              <td>{{ $p->tahun}}</td>
              <td>{{ $p->meter_awal}}</td>

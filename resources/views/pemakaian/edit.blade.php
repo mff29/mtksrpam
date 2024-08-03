@@ -22,6 +22,27 @@
      </div>
 @endsection
 @push('scripts')
+<script>
+     document.addEventListener('DOMContentLoaded', function () {
+          const pelangganSelect = document.querySelector('select[name="pelanggan_id"]');
+          pelangganSelect.addEventListener('change', function () {
+               const pelangganId = this.value;
+               if (pelangganId) {
+                    fetch(`/getLastMeterAkhir/${pelangganId}`)
+                         .then(response => response.json())
+                         .then(data => {
+                              document.querySelector('input[name="meter_awal"]').value = data.meter_akhir !== null ? data.meter_akhir : 0;
+                         })
+                         .catch(error => {
+                              console.error('Error:', error);
+                         });
+               } else {
+                    document.querySelector('input[name="meter_awal"]').value = 0;
+               }
+          });
+     });
+</script>
+
 <script type="text/javascript">
      $(document).ready(function() {
           $('.awal, .akhir').on('input', function() {

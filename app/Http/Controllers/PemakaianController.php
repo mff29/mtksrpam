@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Pemakaian;
 use App\Models\Pelanggan;
 use Yajra\DataTables\Facades\DataTables;
+use App\Exports\PemakaianExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PemakaianController extends Controller
 {
@@ -106,5 +108,10 @@ class PemakaianController extends Controller
     {
         $pemakaian = Pemakaian::findOrFail($id);
         return $pemakaian->delete();
+    }
+
+    public function export_excel(){
+        $now = date("Y-m-d H:i:s");
+        return Excel::download(new PemakaianExport, 'Pemakaian '. $now .'.xlsx');
     }
 }

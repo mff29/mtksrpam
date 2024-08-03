@@ -72,8 +72,8 @@
                 { data: 'pelanggan.nama', name: 'pelanggan.nama' },
                 { data: 'bulan', name: 'bulan' },
                 { data: 'tahun', name: 'tahun' },
-                { data: 'meter_awal', name: 'meter_awal' },
-                { data: 'meter_akhir', name: 'meter_akhir' },
+                { data: 'meter_awal', name: 'meter_awal', orderable: false, searchable: false },
+                { data: 'meter_akhir', name: 'meter_akhir', orderable: false, searchable: false },
                 { data: 'pakai', name: 'pakai' },
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ]
