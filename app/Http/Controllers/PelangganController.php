@@ -107,7 +107,6 @@ class PelangganController extends Controller
     }
 
     public function export_excel(){
-        date_default_timezone_set('Asia/Jakarta');
         $now = date("Y-m-d H:i:s");
         return Excel::download(new PelangganExport, 'Pelanggan '. $now .'.xlsx');
     }

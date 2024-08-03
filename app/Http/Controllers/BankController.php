@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Asset;
+use App\Models\Bank;
 use Yajra\DataTables\Facades\DataTables;
+use App\Exports\BankExport;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\AssetExport;
 
-class AssetController extends Controller
+class BankController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class AssetController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            return DataTables::of(Asset::all())
+            return DataTables::of(Bank::all())
             ->addColumn('action', function($row){
-                $btn = "<a href='/asset/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'><i class='fa fa-edit'></i></a>";
+                $btn = "<a href='/bank/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'><i class='fa fa-edit'></i></a>";
                 $btn .= '<button type="button" onclick="alert_delete(\'' . $row->id . '\')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                 return $btn;
             })
@@ -26,8 +26,8 @@ class AssetController extends Controller
             ->addIndexColumn()
             ->make(true);
         }
-        
-        return view('asset.index');
+
+        return view('bank.index');
     }
 
     /**
@@ -35,7 +35,7 @@ class AssetController extends Controller
      */
     public function create()
     {
-        return view('asset.create');
+        return view('bank.create');
     }
 
     /**
@@ -44,17 +44,15 @@ class AssetController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'harga' => 'required',
-            'kategori' => 'required',
-            'qty' => 'required',
-            'jumlah' => 'required',
+            'jenis_bank' => 'required',
+            'nomor_rekening' => 'required|unique:bank,nomor_rekening',
+            'nama_rekening' => 'required',
         ]);
 
-        $data = Asset::create($request->all());
+        $data = Bank::create($request->all());
         $data->save();
 
-        return redirect(route('asset.index'));
+        return redirect(route('bank.index'));
     }
 
     /**
@@ -70,8 +68,8 @@ class AssetController extends Controller
      */
     public function edit(string $id)
     {
-        $data['asset'] = Asset::findOrFail($id);
-        return view('asset.edit',$data);
+        $data['bank'] = Bank::findOrFail($id);
+        return view('bank.edit', $data);
     }
 
     /**
@@ -80,17 +78,14 @@ class AssetController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama' => 'required',
-            'harga' => 'required',
-            'kategori' => 'required',
-            'qty' => 'required',
-            'jumlah' => 'required',
+            'jenis_bank' => 'required',
+            'nomor_rekening' => 'required',
+            'nama_rekening' => 'required',
         ]);
+        $bank = Bank::findOrFail($id);
+        $bank->update($request->all());
 
-        $asset = asset::findOrFail($id);
-        $asset->update($request->all());
-
-        return redirect(route('asset.index'));
+        return redirect(route('bank.index'));
     }
 
     /**
@@ -98,12 +93,12 @@ class AssetController extends Controller
      */
     public function destroy(string $id)
     {
-        $asset = Asset::findOrFail($id);
-        return $asset->delete();
+        $bank = Bank::findOrFail($id);
+        return $bank->delete();
     }
 
     public function export_excel(){
         $now = date("Y-m-d H:i:s");
-        return Excel::download(new AssetExport, 'Asset '. $now .'.xlsx');
+        return Excel::download(new BankExport, 'Bank '. $now .'.xlsx');
     }
 }
