@@ -28,7 +28,6 @@
                                    </div>
                                    <hr>
                                    @include('alert')
-                                   <h2>Tagihan List</h2>
         <table class="table table-bordered" id="tagihan-table">
             <thead>
                 <tr>
