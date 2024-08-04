@@ -13,4 +13,9 @@ class Pelanggan extends Model
 
     protected $table = "pelanggan";
     protected $fillable =['kode','nama','no_hp','desa','rt','rw','status'];
+
+    public function pemakaian()
+    {
+        return $this->hasMany(Pemakaian::class);
+    }
 }

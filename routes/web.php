@@ -16,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+
+Route::get('/dashboard', 'App\Http\Controllers\DashboardController@dashboard');
 
 Route::get('/pelanggan/export-excel', 'App\Http\Controllers\PelangganController@export_excel')->name('pelanggan.export_excel');
 Route::resource('/pelanggan', 'App\Http\Controllers\PelangganController');
@@ -31,3 +30,19 @@ Route::resource('/bank', 'App\Http\Controllers\BankController');
 Route::get('/pemakaian/export-excel', 'App\Http\Controllers\PemakaianController@export_excel')->name('pemakaian.export_excel');
 Route::resource('/pemakaian', 'App\Http\Controllers\PemakaianController');
 Route::get('/getLastMeterAkhir/{pelanggan_id}', 'App\Http\Controllers\PemakaianController@getLastMeterAkhir')->name('getLastMeterAkhir');
+Route::resource('/tagihan', 'App\Http\Controllers\TagihanController');
+
+Route::get('/getPemakaianByPelanggan/{pelanggan_id}', function($pelanggan_id) {
+    $pemakaian = \App\Models\Pemakaian::where('pelanggan_id', $pelanggan_id)->pluck('bulan', 'id');
+    return response()->json($pemakaian);
+});
+Route::get('/getJumlahPakai/{pemakaian_id}', function($pemakaian_id) {
+    $pemakaian = \App\Models\Pemakaian::find($pemakaian_id);
+    return response()->json(['jumlah_pakai' => $pemakaian->pakai]);
+});
+Route::get('/getHargaPerMeter/{abonemen_id}', function($abonemen_id) {
+    $abonemen = \App\Models\Abonemen::find($abonemen_id);
+    return response()->json(['harga_per_meter' => $abonemen->harga]);
+});
+Route::post('/tagihan/update-status/{id}', 'App\Http\Controllers\TagihanController@updateStatus')->name('tagihan.updateStatus');
+

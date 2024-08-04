@@ -44,8 +44,14 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{ url('tagihan') }}" class="nav-link">
+                <i class="fa fa-money-bill nav-icon"></i>
+                <p>Tagihan</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{ url('pemakaian') }}" class="nav-link">
-                <i class="fa fa-users nav-icon"></i>
+                <i class="fa fa-water nav-icon"></i>
                 <p>Pemakaian</p>
               </a>
             </li>
