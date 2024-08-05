@@ -54,21 +54,22 @@
         $('#abonemen_id').change(function() {
             var abonemen_id = $(this).val();
             $.ajax({
-                url: '/getHargaPerMeter/' + abonemen_id,
+                url: '/getAbonemenDetails/' + abonemen_id,
                 type: 'GET',
                 success: function(data) {
-                    $('#harga_per_meter').val(data.harga_per_meter);
+                    $('#harga_per_meter').val(data.harga);
+                    $('#administrasi').val(data.administrasi);
                     calculateTagihan();
                 }
             });
         });
 
         function calculateTagihan() {
-            var harga_per_meter = $('#harga_per_meter').val();
-            var jumlah_pakai = $('#jumlah_pakai').val();
-            if (harga_per_meter && jumlah_pakai) {
-                $('#tagihan').val(harga_per_meter * jumlah_pakai);
-            }
+            var harga_per_meter = parseFloat($('#harga_per_meter').val()) || 0;
+            var jumlah_pakai = parseFloat($('#jumlah_pakai').val()) || 0;
+            var administrasi = parseFloat($('#administrasi').val()) || 0;
+            var tagihan = (harga_per_meter * jumlah_pakai) + administrasi;
+            $('#tagihan').val(tagihan);
         }
     });
 </script>

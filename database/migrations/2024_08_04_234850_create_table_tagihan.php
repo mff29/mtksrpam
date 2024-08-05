@@ -18,6 +18,8 @@ return new class extends Migration
             $table->uuid('abonemen_id');
             $table->integer('harga_per_meter');
             $table->integer('jumlah_pakai');
+            $table->integer('administrasi');
+            $table->integer('keterlambatan')->nullable();
             $table->integer('tagihan');
             $table->string('jenis_bayar');
             $table->string('status');

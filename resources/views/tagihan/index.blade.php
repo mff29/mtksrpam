@@ -37,7 +37,8 @@
                     <th>Abonemen</th>
                     <th>Harga Per Meter</th>
                     <th>Jumlah Pakai</th>
-                    <th>Tagihan</th>
+                    <th>Administrasi</th>
+                    <th>Total Tagihan</th>
                     <th>Jenis Bayar</th>
                     <th>Status</th>
                     {{-- <th width="90">#</th> --}}
@@ -76,6 +77,7 @@
                     { data: 'abonemen.level', name: 'abonemen.level' },
                     { data: 'harga_per_meter', name: 'harga_per_meter' },
                     { data: 'jumlah_pakai', name: 'jumlah_pakai' },
+                    { data: 'administrasi', name: 'administrasi' },
                     { data: 'tagihan', name: 'tagihan' },
                     { data: 'jenis_bayar', name: 'jenis_bayar' },
                     {

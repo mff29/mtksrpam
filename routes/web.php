@@ -40,9 +40,13 @@ Route::get('/getJumlahPakai/{pemakaian_id}', function($pemakaian_id) {
     $pemakaian = \App\Models\Pemakaian::find($pemakaian_id);
     return response()->json(['jumlah_pakai' => $pemakaian->pakai]);
 });
-Route::get('/getHargaPerMeter/{abonemen_id}', function($abonemen_id) {
+Route::get('/getAbonemenDetails/{abonemen_id}', function($abonemen_id) {
     $abonemen = \App\Models\Abonemen::find($abonemen_id);
-    return response()->json(['harga_per_meter' => $abonemen->harga]);
+    return response()->json([
+        'harga' => $abonemen->harga,
+        'administrasi' => $abonemen->administrasi
+    ]);
 });
+
 Route::post('/tagihan/update-status/{id}', 'App\Http\Controllers\TagihanController@updateStatus')->name('tagihan.updateStatus');
 

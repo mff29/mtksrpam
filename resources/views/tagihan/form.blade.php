@@ -1,59 +1,64 @@
-<div class="form-group">
-    {!! Form::label('pelanggan_id', 'Pelanggan') !!}
-    <div class="col-sm-4">
-        {!! Form::select('pelanggan_id', $pelanggans->pluck('nama', 'id'), null, ['class' => 'form-control', 'placeholder' => 'Select Pelanggan', 'id' => 'pelanggan_id']) !!}
-    </div>
-</div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Nama Pelanggan</label>
+            <div class="col-sm-4">
+                {!! Form::select('pelanggan_id', $pelanggans->pluck('nama', 'id'), null, ['class' => 'form-control', 'placeholder' => 'Select Pelanggan', 'id' => 'pelanggan_id']) !!}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Bulan Pemakaian</label>
+            <div class="col-sm-4">
+                {!! Form::select('pemakaian_id', [], null, ['class' => 'form-control', 'placeholder' => 'Select Pemakaian', 'id' => 'pemakaian_id']) !!}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Abonemen</label>
+            <div class="col-sm-4">
+                {!! Form::select('abonemen_id', $abonemens->pluck('level', 'id'), null, ['class' => 'form-control', 'placeholder' => 'Select Abonemen', 'id' => 'abonemen_id']) !!}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Harga per M3</label>
+            <div class="col-sm-4">
+                {!! Form::number('harga_per_meter', null, ['class' => 'form-control', 'id' => 'harga_per_meter', 'readonly']) !!}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Jumlah Pakai</label>
+            <div class="col-sm-4">
+                {!! Form::number('jumlah_pakai', null, ['class' => 'form-control', 'id' => 'jumlah_pakai', 'readonly']) !!}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Biaya Administrasi</label>
+            <div class="col-sm-4">
+                {!! Form::number('administrasi', null, ['class' => 'form-control', 'id' => 'administrasi', 'readonly']) !!}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Total Tagihan</label>
+            <div class="col-sm-4">
+                {!! Form::number('tagihan', null, ['class' => 'form-control', 'id' => 'tagihan', 'readonly']) !!}
+            </div>
+        </div>
+
 
 <div class="form-group">
-    {!! Form::label('pemakaian_id', 'Pemakaian') !!}
-    <div class="col-sm-4">
-        {!! Form::select('pemakaian_id', [], null, ['class' => 'form-control', 'placeholder' => 'Select Pemakaian', 'id' => 'pemakaian_id']) !!}
-        @error('pemakaian_id')
-        <div class="text-danger">{{ $message }}</div>
-        @enderror
-    </div>
-</div>
-
-<div class="form-group">
-    {!! Form::label('abonemen_id', 'Abonemen') !!}
-    <div class="col-sm-4">
-        {!! Form::select('abonemen_id', $abonemens->pluck('level', 'id'), null, ['class' => 'form-control', 'placeholder' => 'Select Abonemen', 'id' => 'abonemen_id']) !!}
-    </div>
-</div>
-
-<div class="form-group">
-    {!! Form::label('harga_per_meter', 'Harga Per Meter') !!}
-    <div class="col-sm-4">
-        {!! Form::number('harga_per_meter', null, ['class' => 'form-control', 'id' => 'harga_per_meter', 'readonly']) !!}
-    </div>
-</div>
-
-<div class="form-group">
-    {!! Form::label('jumlah_pakai', 'Jumlah Pakai') !!}
-    <div class="col-sm-4">
-        {!! Form::number('jumlah_pakai', null, ['class' => 'form-control', 'id' => 'jumlah_pakai', 'readonly']) !!}
-    </div>
-</div>
-
-<div class="form-group">
-    {!! Form::label('tagihan', 'Tagihan') !!}
-    <div class="col-sm-4">
-        {!! Form::number('tagihan', null, ['class' => 'form-control', 'id' => 'tagihan', 'readonly']) !!}
-    </div>
-</div>
-
-<div class="form-group">
-    {!! Form::label('jenis_bayar', 'Jenis Bayar') !!}
+    <label class="col-sm-2 control-label">Jenis Bayar</label>
     <div class="col-sm-4">
         {!! Form::select('jenis_bayar',['Cash'=>'Cash','Transfer'=>'Transfer','QRIS'=>'QRIS','Lainnya'=>'Lainnya'], null, ['class' => 'form-control', 'placeholder'=>'Pilih Pembayaran']) !!}
     </div>
 </div>
 
 <div class="form-group">
-    {!! Form::label('status', 'Status') !!}
+    <label class="col-sm-2 control-label">Status</label>
     <div class="col-sm-4">
-        {!! Form::select('status', ['Belum Lunas'=>'Belum Lunas','Lunas'=>'Lunas'], null, ['class' => 'form-control']) !!}
+        {!! Form::select('status',['Belum Lunas'=>'Belum Lunas', 'Lunas'=>'Lunas'], null, ['class'=>'form-control', 'placeholder'=>'Pilih Status']) !!}
     </div>
 </div>
 

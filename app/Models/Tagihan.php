@@ -12,7 +12,7 @@ class Tagihan extends Model
     use HasFactory, Uuids, SoftDeletes;
 
     protected $table = "tagihan";
-    protected $fillable = ['pelanggan_id','pemakaian_id','abonemen_id','harga_per_meter','jumlah_pakai','tagihan','jenis_bayar','status'];
+    protected $fillable = ['pelanggan_id','pemakaian_id','abonemen_id','harga_per_meter','jumlah_pakai','administrasi','tagihan','jenis_bayar','status'];
 
     public function pelanggan()
     {
