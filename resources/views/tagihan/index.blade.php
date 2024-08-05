@@ -3,61 +3,61 @@
 @section('content')
 <div class="content-wrapper">
      <!-- Main content -->
-     <section class="content">
-          <div class="container-fluid">
-               <div class="row">
-                    <div class="col-12">
-                         <div class="card mt-3">
-                              <div class="card-header">
-                                   <h3 class="card-title">DATA TAGIHAN</h3>
-                                   <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                             <i class="fas fa-minus"></i>
-                                        </button>
-                                   </div>
-                              </div>
-                              <div class="card-body">
-                                   <div class="d-flex justify-content-between mb-3">
-                                        <a href="{{route('tagihan.create')}}" class="btn btn-info btn-social">
-                                             <i class="fa fa-plus" aria-hidden="true"></i> Tambah Data
-                                        </a>
-                                        <div>
-                                             <a href="/tagihan/export-excel" class="btn btn-success mr-1"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
-                                             <a href="/tagihan/export-pdf" class="btn btn-danger"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
-                                        </div>
-                                   </div>
-                                   <hr>
-                                   @include('alert')
-        <table class="table table-bordered" id="tagihan-table">
-            <thead>
-                <tr>
-                    {{-- <th width="10">No</th> --}}
-                    <th>Pelanggan</th>
-                    <th>Pemakaian</th>
-                    <th>Abonemen</th>
-                    <th>Harga Per Meter</th>
-                    <th>Jumlah Pakai</th>
-                    <th>Administrasi</th>
-                    <th>Denda Keterlambatan</th>
-                    <th>Total Tagihan</th>
-                    <th>Jenis Bayar</th>
-                    <th>Status</th>
-                    {{-- <th width="90">#</th> --}}
-                </tr>
-            </thead>
-        </table>
-                              </div>
-                              <!-- /.card-body -->
-                              <div class="card-footer">
-                              Footer
-                              </div>
-                              <!-- /.card-footer-->
-                         </div>
-                    <!-- /.card -->
-                    </div>
-               </div>
-          </div>
-     </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                        <div class="col-12">
+                            <div class="card mt-3">
+                                <div class="card-header">
+                                    <h3 class="card-title">DATA TAGIHAN</h3>
+                                    <div class="card-tools">
+                                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-3">
+                                            <a href="{{route('tagihan.create')}}" class="btn btn-info btn-social">
+                                                <i class="fa fa-plus" aria-hidden="true"></i> Tambah Data
+                                            </a>
+                                            <div>
+                                                <a href="/tagihan/export-excel" class="btn btn-success mr-1"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
+                                                <a href="/tagihan/export-pdf" class="btn btn-danger"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
+                                            </div>
+                                    </div>
+                                    <hr>
+                                    @include('alert')
+                                    <table class="table table-bordered" id="tagihan-table">
+                                        <thead>
+                                            <tr>
+                                                <th width="10">No</th>
+                                                <th>Pelanggan</th>
+                                                <th>Pemakaian</th>
+                                                <th>Abonemen</th>
+                                                <th>Harga Per Meter</th>
+                                                <th>Jumlah Pakai</th>
+                                                <th>Biaya Administrasi</th>
+                                                <th>Denda Keterlambatan</th>
+                                                <th>Total Tagihan</th>
+                                                <th>Jenis Bayar</th>
+                                                <th>Status</th>
+                                                {{-- <th width="90">#</th> --}}
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+                                Footer
+                                </div>
+                                <!-- /.card-footer-->
+                            </div>
+                        <!-- /.card -->
+                        </div>
+                </div>
+            </div>
+        </section>
      <!-- /.content -->
 </div>
 @endsection
@@ -73,6 +73,7 @@
                 serverSide: true,
                 ajax: '/tagihan',
                 columns: [
+                    {data: 'DT_RowIndex', orderable: false, searchable: false},
                     { data: 'pelanggan.nama', name: 'pelanggan.nama' },
                     { data: 'pemakaian', name: 'pemakaian' },
                     { data: 'abonemen.level', name: 'abonemen.level' },
