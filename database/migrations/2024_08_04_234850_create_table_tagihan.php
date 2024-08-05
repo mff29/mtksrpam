@@ -19,7 +19,8 @@ return new class extends Migration
             $table->integer('harga_per_meter');
             $table->integer('jumlah_pakai');
             $table->integer('administrasi');
-            $table->integer('denda_keterlambatan')->nullable();
+            $table->string('telat');
+            $table->integer('denda_keterlambatan');
             $table->integer('tagihan');
             $table->string('jenis_bayar');
             $table->string('status');

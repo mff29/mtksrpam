@@ -41,8 +41,11 @@
         </div>
 
         <div class="form-group">
-            {!! Form::label('keterlambatan', 'Keterlambatan') !!}
-            {!! Form::select('keterlambatan', [0 => 'Tidak', 1 => 'Ya'], null, ['class' => 'form-control col-sm-4', 'id' => 'keterlambatan','placeholder'=>'Select keterlambatan']) !!}
+            {{-- {!! Form::label('keterlambatan', 'Keterlambatan') !!} --}}
+            <label for="keterlambatan" class="col-sm-2 control-label">Keterlambatan</label>
+            <div class="col-sm-4">
+                {!! Form::select('telat', ['Tidak' => 'Tidak', 'Ya' => 'Ya'], null, ['class' => 'form-control', 'id' => 'keterlambatan','placeholder'=>'Select keterlambatan']) !!}
+            </div>
         </div>
 
         <div class="form-group d-none" id="denda-group">
