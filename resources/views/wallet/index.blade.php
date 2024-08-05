@@ -57,65 +57,63 @@
 @endsection
 @push('scripts')
 <script src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
 <script type="text/javascript">
      $(function() {
-        $('#wallet-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '/wallet',
-            columns: [
-                {data: 'DT_RowIndex', orderable: false, searchable: false},
-                { data: 'jenis', name: 'jenis' },
-                { data: 'kode', name: 'kode' },
-                { data: 'nomor_rekening', name: 'nomor_rekening' },
-                { data: 'nama_rekening', name: 'nama_rekening' },
-                { data: 'action', name: 'action', orderable: false, searchable: false }
-            ]
-        });
-    });
+          $('#wallet-table').DataTable({
+               processing: true,
+               serverSide: true,
+               ajax: '/wallet',
+               columns: [
+                    {data: 'DT_RowIndex', orderable: false, searchable: false},
+                    { data: 'jenis', name: 'jenis' },
+                    { data: 'kode', name: 'kode' },
+                    { data: 'nomor_rekening', name: 'nomor_rekening' },
+                    { data: 'nama_rekening', name: 'nama_rekening' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false }
+               ]
+          });
+     });
 
-    function alert_delete(id){
+     function alert_delete(id) {
           var dataId = id;
-          swal({
-               title: "Konfirmasi",
+          Swal.fire({
+               title: 'Konfirmasi',
                text: "Apakah Anda yakin ingin menghapus data ini?",
-               icon: "warning",
+               icon: 'warning',
                showCancelButton: true,
-               confirmButtonColor: "#d33",
-               cancelButtonColor: "#3085d6",
-               confirmButtonText: "Hapus",
-               customClass: 'sweet-alert',
-               cancelButtonText: "Batal"
+               confirmButtonColor: '#d33',
+               cancelButtonColor: '#3085d6',
+               confirmButtonText: 'Hapus',
+               cancelButtonText: 'Batal'
           }).then((result) => {
-               if (result == true) {
+               if (result.isConfirmed) {
                     $.ajax({
                          type: "DELETE",
-                         data:{ _token: '{{csrf_token()}}'},
-                         url: "/wallet/" + dataId, // Ganti dengan URL yang sesuai
+                         data:{ _token: '{{ csrf_token() }}' },
+                         url: "/wallet/" + dataId,
                          success: function(response) {
-                              swal({
-                                   title: "Sukses",
-                                   text: response.message,
-                                   icon: "success",
-                              }).then((result) => {
-                                   if(result==true){
-                                        location.reload();
-                                   }
-                              });
+                         Swal.fire({
+                              title: 'Sukses',
+                              text: response.message,
+                              icon: 'success'
+                         }).then((result) => {
+                              if(result.isConfirmed){
+                                   location.reload();
+                              }
+                         });
                          },
                          error: function(error) {
-                              swal({
-                                   title: "Error",
-                                   text: "Terjadi kesalahan saat menghapus data.",
-                                   icon: "error",
-                              });
-                         // Handle error
-                         },
+                         Swal.fire({
+                              title: 'Error',
+                              text: "Terjadi kesalahan saat menghapus data.",
+                              icon: 'error'
+                         });
+                         }
                     });
                }
-        });
-    }
+          });
+     }
 </script>
 @endpush

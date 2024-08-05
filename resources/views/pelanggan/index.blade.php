@@ -63,68 +63,66 @@
 @endsection
 @push('scripts')
 <script src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
 <script type="text/javascript">
      $(function() {
-        $('#pelanggan-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '/pelanggan',
-            columns: [
-                {data: 'DT_RowIndex', orderable: false, searchable: false},
-                { data: 'kode', name: 'kode' },
-                { data: 'nama', name: 'nama' },
-                { data: 'no_hp', name: 'no_hp' },
-                { data: 'desa', name: 'desa' },
-                { data: 'rt', name: 'rt' },
-                { data: 'rw', name: 'rw' },
-                { data: 'status', name: 'status' },
-                { data: 'action', name: 'action', orderable: false, searchable: false }
-            ]
-        });
-    });
+          $('#pelanggan-table').DataTable({
+               processing: true,
+               serverSide: true,
+               ajax: '/pelanggan',
+               columns: [
+                    {data: 'DT_RowIndex', orderable: false, searchable: false},
+                    { data: 'kode', name: 'kode' },
+                    { data: 'nama', name: 'nama' },
+                    { data: 'no_hp', name: 'no_hp' },
+                    { data: 'desa', name: 'desa' },
+                    { data: 'rt', name: 'rt' },
+                    { data: 'rw', name: 'rw' },
+                    { data: 'status', name: 'status' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false }
+               ]
+          });
+     });
 
-    function alert_delete(id){
-        var dataId = id;
-        swal({
-            title: "Konfirmasi",
-            text: "Apakah Anda yakin ingin menghapus data ini?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "Hapus",
-            customClass: 'sweet-alert',
-            cancelButtonText: "Batal"
-        }).then((result) => {
-            if (result == true) {
-                $.ajax({
-                    type: "DELETE",
-                    data:{ _token: '{{csrf_token()}}'},
-                    url: "/pelanggan/" + dataId, // Ganti dengan URL yang sesuai
-                    success: function(response) {
-                        swal({
-                            title: "Sukses",
-                            text: response.message,
-                            icon: "success",
-                        }).then((result) => {
-                          if(result==true){
-                            location.reload();
-                          }
-                        });
-                    },
-                    error: function(error) {
-                        swal({
-                            title: "Error",
-                            text: "Terjadi kesalahan saat menghapus data.",
-                            icon: "error",
-                        });
-                        // Handle error
-                    },
-                });
-            }
-        });
-    }
+     function alert_delete(id) {
+          var dataId = id;
+          Swal.fire({
+               title: 'Konfirmasi',
+               text: "Apakah Anda yakin ingin menghapus data ini?",
+               icon: 'warning',
+               showCancelButton: true,
+               confirmButtonColor: '#d33',
+               cancelButtonColor: '#3085d6',
+               confirmButtonText: 'Hapus',
+               cancelButtonText: 'Batal'
+          }).then((result) => {
+               if (result.isConfirmed) {
+                    $.ajax({
+                         type: "DELETE",
+                         data:{ _token: '{{ csrf_token() }}' },
+                         url: "/pelanggan/" + dataId,
+                         success: function(response) {
+                         Swal.fire({
+                              title: 'Sukses',
+                              text: response.message,
+                              icon: 'success'
+                         }).then((result) => {
+                              if(result.isConfirmed){
+                                   location.reload();
+                              }
+                         });
+                         },
+                         error: function(error) {
+                         Swal.fire({
+                              title: 'Error',
+                              text: "Terjadi kesalahan saat menghapus data.",
+                              icon: 'error'
+                         });
+                         }
+                    });
+               }
+          });
+     }
 </script>
 @endpush
