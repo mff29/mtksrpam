@@ -1,13 +1,13 @@
 <div class="form-group">
      <label class="col-sm-2 control-label">Level</label>
      <div class="col-sm-4">
-         {!! Form::text('level', null, ['class'=>'form-control','Placeholder'=>'>=20 M3']) !!}
+         {!! Form::text('level', null, ['class'=>'form-control','Placeholder'=>'kategori / >=2000 M3', 'required']) !!}
      </div>
 </div>
 <div class="form-group">
      <label class="col-sm-2 control-label">Harga per Meter</label>
      <div class="col-sm-4">
-         {!! Form::number('harga', null, ['class'=>'form-control','Placeholder'=>'Harga per Meter']) !!}
+         {!! Form::number('harga', null, ['class'=>'form-control','Placeholder'=>'Harga per Meter', 'required']) !!}
      </div>
 </div>
 <div class="form-group">

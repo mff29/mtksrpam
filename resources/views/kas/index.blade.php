@@ -17,9 +17,34 @@
                                    </div>
                               </div>
                               <div class="card-body">
+                                   @include('alert')
+                                   <div class="d-flex justify-between">
+                                        <div class="info-box col-3 mr-3">
+                                             <span class="info-box-icon bg-success elevation-1"><i class="bi bi-cash-stack"></i></span>
+                                             <div class="info-box-content">
+                                                  <span class="info-box-text">TOTAL UANG KAS</span>
+                                                  <h5 class="info-box-number">RP {{ number_format($total_uang_kas) }}</h5>
+                                             </div>
+                                        </div>
+                                        <div class="info-box col-3 mr-3">
+                                             <span class="info-box-icon bg-info elevation-1"><i class="bi bi-droplet"></i></span>
+                                             <div class="info-box-content">
+                                                  <span class="info-box-text">TOTAL PENDAPATAN AIR</span>
+                                                  <span class="info-box-number">RP {{ number_format($pendapatan_air) }}</span>
+                                             </div>
+                                        </div>
+                                        <div class="info-box col-3">
+                                             <span class="info-box-icon bg-warning elevation-1"><i class="bi bi-clipboard2"></i></span>
+                                             <div class="info-box-content">
+                                                  <span class="info-box-text">JUMLAH KAS</span>
+                                                  <span class="info-box-number">RP {{ number_format($jumlah_kas) }}</span>
+                                             </div>
+                                        </div>
+                                   </div>
+                                   <hr>
                                    <div class="d-flex justify-content-between mb-3">
                                         <a href="{{route('kas.create')}}" class="btn btn-info btn-social">
-                                             <i class="fa fa-plus" aria-hidden="true"></i> Tambah Pengeluaran
+                                             <i class="fa fa-plus" aria-hidden="true"></i> Tambah Data Kas
                                         </a>
                                         <div>
                                              <a href="/kas/export-excel" class="btn btn-success mr-1"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
@@ -27,26 +52,27 @@
                                         </div>
                                    </div>
                                    <hr>
-                                   @include('alert')
-                                   <div class="d-flex justify-between">
-                                        <div class="info-box col-sm-4 mr-3">
-                                             <span class="info-box-icon bg-success elevation-1"><i class="bi bi-clipboard2-plus-fill"></i></span>
-                                             <div class="info-box-content">
-                                                  <span class="info-box-text">TOTAL PENDAPATAN</span>
-                                                  <h4 class="info-box-number">RP {{ $pemasukan }}</h4>
-                                             </div>
-                                             <!-- /.info-box-content -->
-                                        </div>
-                                        <div class="info-box col-sm-4">
-                                             <span class="info-box-icon bg-danger elevation-1"><i class="bi bi-clipboard2-minus-fill"></i></span>
-                                             <div class="info-box-content">
-                                                  <span class="info-box-text">TOTAL PENGELUARAN</span>
-                                                  <h4 class="info-box-number">ini pengeluaran</h4>
-                                             </div>
-                                             <!-- /.info-box-content -->
-                                        </div>
-                                        <!-- /.info-box -->
-                                   </div>
+                                   
+                                   <table class="table table-bordered table-striped" id="kas-table">
+                                        <thead>
+                                             <tr>
+                                                  <th width="10">No</th>
+                                                  <th>Tipe</th>
+                                                  <th>Deskripsi</th>
+                                                  <th>Nominal Pendapatan</th>
+                                                  <th>Nominal Pengeluaran</th>
+                                                  <th>#</th>
+                                             </tr>
+                                        </thead>
+                                        <tfoot>
+                                             <tr>
+                                                 <th colspan="3">Total</th>
+                                                 <th>RP {{ number_format($total_pendapatan) }}</th>
+                                                 <th>RP {{ number_format($total_pengeluaran) }}</th>
+                                                 <th>RP {{ number_format($jumlah_kas) }}</th>
+                                             </tr>
+                                         </tfoot>
+                                   </table>
                               </div>
                               <!-- /.card-body -->
                               <div class="card-footer">
@@ -68,22 +94,22 @@
 
 <script type="text/javascript">
      $(function() {
-        $('#kas-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '/kas',
-            columns: [
-                {data: 'DT_RowIndex', orderable: false, searchable: false},
-                { data: 'jenis_kas', name: 'jenis_kas' },
-                { data: 'kode_kas', name: 'kode_kas' },
-                { data: 'nomor_rekening', name: 'nomor_rekening' },
-                { data: 'nama_rekening', name: 'nama_rekening' },
-                { data: 'action', name: 'action', orderable: false, searchable: false }
-            ]
-        });
-    });
+          $('#kas-table').DataTable({
+               processing: true,
+               serverSide: true,
+               ajax: '/kas',
+               columns: [
+                    {data: 'DT_RowIndex', orderable: false, searchable: false},
+                    { data: 'tipe', name: 'tipe' },
+                    { data: 'deskripsi', name: 'deskripsi' },
+                    { data: 'nominal_pendapatan', name: 'nominal_pendapatan' },
+                    { data: 'nominal_pengeluaran', name: 'nominal_pengeluaran' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false }
+               ]
+          });
+     });
 
-    function alert_delete(id){
+     function alert_delete(id){
           var dataId = id;
           swal({
                title: "Konfirmasi",
@@ -122,7 +148,7 @@
                          },
                     });
                }
-        });
-    }
+          });
+     }
 </script>
 @endpush

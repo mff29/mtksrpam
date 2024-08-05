@@ -1,7 +1,7 @@
 <div class="form-group">
      <label class="col-sm-2 control-label">Nama Asset</label>
      <div class="col-sm-4">
-         {!! Form::text('nama', null, ['class'=>'form-control','Placeholder'=>'Nama Asset']) !!}
+         {!! Form::text('nama', null, ['class'=>'form-control','Placeholder'=>'Nama Asset', 'required']) !!}
      </div>
 </div>
 <div class="form-group">
@@ -13,8 +13,7 @@
 <div class="form-group">
      <label class="col-sm-2 control-label">Harga</label>
      <div class="col-sm-4">
-         {!! Form::text('harga', null, ['class'=>'harga form-control','Placeholder'=>'harga']) !!}
-         {{-- <input type="number" name="harga" id="harga" class="harga form-control" placeholder="Harga"> --}}
+         {!! Form::number('harga', null, ['class'=>'harga form-control','Placeholder'=>'harga', 'required']) !!}
      </div>
 </div>
 <div class="form-group">
@@ -26,15 +25,13 @@
 <div class="form-group">
      <label class="col-sm-2 control-label">Quantity</label>
      <div class="col-sm-4">
-         {!! Form::number('qty', null, ['class'=>'qty form-control','Placeholder'=>'Quantity']) !!}
-         {{-- <input type="number" name="qty" id="qty" class="form-control" placeholder="Quantity"> --}}
+         {!! Form::number('qty', null, ['class'=>'qty form-control','Placeholder'=>'Quantity', 'required']) !!}
      </div>
 </div>
 <div class="form-group">
      <label class="col-sm-2 control-label">Jumlah</label>
      <div class="col-sm-4">
          {!! Form::text('jumlah', null, ['class'=>'jumlah form-control','Placeholder'=>'Harga Total', 'readonly']) !!}
-         {{-- <input type="number" name="jumlah" id="jumlah" class="form-control" placeholder="Jumlah" readonly> --}}
      </div>
 </div>
 <div class="form-group">

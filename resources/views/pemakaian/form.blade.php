@@ -13,7 +13,7 @@
 <div class="form-group">
      <label class="col-sm-2 control-label">Tahun</label>
      <div class="col-sm-4">
-         {!! Form::number('tahun', null, ['class'=>'form-control','Placeholder'=>'Tahun']) !!}
+         {!! Form::number('tahun', null, ['class'=>'form-control','Placeholder'=>'Tahun', 'required']) !!}
      </div>
 </div>
 <div class="form-group">
@@ -25,7 +25,7 @@
 <div class="form-group">
      <label class="col-sm-2 control-label">Meter Akhir</label>
      <div class="col-sm-4">
-         {!! Form::number('meter_akhir', null, ['class'=>'akhir form-control','Placeholder'=>'Meter Akhir']) !!}
+         {!! Form::number('meter_akhir', null, ['class'=>'akhir form-control','Placeholder'=>'Meter Akhir', 'required']) !!}
      </div>
 </div>
 <div class="form-group">

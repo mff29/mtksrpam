@@ -62,24 +62,23 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Jenis Bayar</label>
+            <div class="col-sm-4">
+                {!! Form::select('jenis_bayar',['Cash'=>'Cash','Transfer'=>'Transfer','QRIS'=>'QRIS','Lainnya'=>'Lainnya'], null, ['class' => 'form-control', 'placeholder'=>'Pilih Pembayaran']) !!}
+            </div>
+        </div>
 
-<div class="form-group">
-    <label class="col-sm-2 control-label">Jenis Bayar</label>
-    <div class="col-sm-4">
-        {!! Form::select('jenis_bayar',['Cash'=>'Cash','Transfer'=>'Transfer','QRIS'=>'QRIS','Lainnya'=>'Lainnya'], null, ['class' => 'form-control', 'placeholder'=>'Pilih Pembayaran']) !!}
-    </div>
-</div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Status</label>
+            <div class="col-sm-4">
+                {!! Form::select('status',['Belum Lunas'=>'Belum Lunas', 'Lunas'=>'Lunas'], null, ['class'=>'form-control', 'placeholder'=>'Pilih Status']) !!}
+            </div>
+        </div>
 
-<div class="form-group">
-    <label class="col-sm-2 control-label">Status</label>
-    <div class="col-sm-4">
-        {!! Form::select('status',['Belum Lunas'=>'Belum Lunas', 'Lunas'=>'Lunas'], null, ['class'=>'form-control', 'placeholder'=>'Pilih Status']) !!}
-    </div>
-</div>
-
-<div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-         <button type="submit" class="btn btn-success btn btn-sm"><i class="fa fa-save" aria-hidden="true"></i> Simpan</button>
-         <a href="/tagihan" class="btn btn-danger btn btn-sm"><i class="fa fa-share" aria-hidden="true"></i> Kembali</a>
-    </div>
-</div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success btn btn-sm"><i class="fa fa-save" aria-hidden="true"></i> Simpan</button>
+                <a href="/tagihan" class="btn btn-danger btn btn-sm"><i class="fa fa-share" aria-hidden="true"></i> Kembali</a>
+            </div>
+        </div>

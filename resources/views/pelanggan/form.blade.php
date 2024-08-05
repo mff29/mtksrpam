@@ -7,7 +7,7 @@
 <div class="form-group">
      <label class="col-sm-2 control-label">Nama Lengkap</label>
      <div class="col-sm-4">
-         {!! Form::text('nama', null, ['class'=>'form-control','Placeholder'=>'Nama Lengkap']) !!}
+         {!! Form::text('nama', null, ['class'=>'form-control','Placeholder'=>'Nama Lengkap', 'required']) !!}
      </div>
 </div>
 <div class="form-group">

@@ -1,7 +1,7 @@
 <div class="form-group">
      <label class="col-sm-2 control-label">Jenis Wallet</label>
      <div class="col-sm-4">
-         {!! Form::text('jenis', null, ['class'=>'form-control','Placeholder'=>'BCA, BNI, BRI, Mandiri, Dana, dll.']) !!}
+         {!! Form::text('jenis', null, ['class'=>'form-control','Placeholder'=>'BCA, BNI, BRI, Mandiri, Dana, dll.', 'required']) !!}
      </div>
 </div>
 <div class="form-group">
@@ -13,13 +13,13 @@
 <div class="form-group">
      <label class="col-sm-2 control-label">Nomor Rekening</label>
      <div class="col-sm-4">
-         {!! Form::number('nomor_rekening', null, ['class'=>'form-control','Placeholder'=>'Nomor Rekening']) !!}
+         {!! Form::number('nomor_rekening', null, ['class'=>'form-control','Placeholder'=>'Nomor Rekening', 'required']) !!}
      </div>
 </div>
 <div class="form-group">
      <label class="col-sm-2 control-label">Nama Rekening</label>
      <div class="col-sm-4">
-         {!! Form::text('nama_rekening', null, ['class'=>'form-control','Placeholder'=>'Nama Rekening']) !!}
+         {!! Form::text('nama_rekening', null, ['class'=>'form-control','Placeholder'=>'Nama Rekening', 'required']) !!}
      </div>
 </div>
 <div class="form-group">
