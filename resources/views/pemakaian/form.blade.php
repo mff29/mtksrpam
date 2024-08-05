@@ -31,7 +31,7 @@
 <div class="form-group">
      <label class="col-sm-2 control-label">Jumlah Pakai</label>
      <div class="col-sm-4">
-         {!! Form::number('pakai', null, ['class'=>'pakai form-control','Placeholder'=>'Jumlah Pakai']) !!}
+         {!! Form::number('pakai', null, ['class'=>'pakai form-control','Placeholder'=>'Jumlah Pakai','readonly']) !!}
      </div>
 </div>
 <div class="form-group">
