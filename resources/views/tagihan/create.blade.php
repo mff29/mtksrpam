@@ -59,16 +59,39 @@
                 success: function(data) {
                     $('#harga_per_meter').val(data.harga);
                     $('#administrasi').val(data.administrasi);
+                    if ($('#keterlambatan').val() == 1) {
+                        $('#denda_keterlambatan').val(data.keterlambatan).parent().parent().removeClass('d-none');
+                    }
                     calculateTagihan();
                 }
             });
+        });
+
+        $('#keterlambatan').change(function() {
+            var keterlambatan = $(this).val();
+            if (keterlambatan == 1) {
+                var abonemen_id = $('#abonemen_id').val();
+                $.ajax({
+                    url: '/getAbonemenDetails/' + abonemen_id,
+                    type: 'GET',
+                    success: function(data) {
+                        $('#denda_keterlambatan').val(data.keterlambatan).parent().parent().removeClass('d-none');
+                        calculateTagihan();
+                    }
+                });
+            } else {
+                $('#denda_keterlambatan').val(0).parent().parent().addClass('d-none');
+                calculateTagihan();
+            }
         });
 
         function calculateTagihan() {
             var harga_per_meter = parseFloat($('#harga_per_meter').val()) || 0;
             var jumlah_pakai = parseFloat($('#jumlah_pakai').val()) || 0;
             var administrasi = parseFloat($('#administrasi').val()) || 0;
-            var tagihan = (harga_per_meter * jumlah_pakai) + administrasi;
+            var denda_keterlambatan = parseFloat($('#denda_keterlambatan').val()) || 0;
+
+            var tagihan = (harga_per_meter * jumlah_pakai) + administrasi + denda_keterlambatan;
             $('#tagihan').val(tagihan);
         }
     });

@@ -44,9 +44,12 @@ Route::get('/getAbonemenDetails/{abonemen_id}', function($abonemen_id) {
     $abonemen = \App\Models\Abonemen::find($abonemen_id);
     return response()->json([
         'harga' => $abonemen->harga,
-        'administrasi' => $abonemen->administrasi
+        'administrasi' => $abonemen->administrasi,
+        'keterlambatan' => $abonemen->keterlambatan
     ]);
 });
 
 Route::post('/tagihan/update-status/{id}', 'App\Http\Controllers\TagihanController@updateStatus')->name('tagihan.updateStatus');
+
+Route::resource('/kas', 'App\Http\Controllers\KasController');
 

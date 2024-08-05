@@ -41,6 +41,18 @@
         </div>
 
         <div class="form-group">
+            {!! Form::label('keterlambatan', 'Keterlambatan') !!}
+            {!! Form::select('keterlambatan', [0 => 'Tidak', 1 => 'Ya'], null, ['class' => 'form-control col-sm-4', 'id' => 'keterlambatan','placeholder'=>'Select keterlambatan']) !!}
+        </div>
+
+        <div class="form-group d-none" id="denda-group">
+            <label for="denda_keterlambatan" class="col-sm-2 control-label">Denda</label>
+            <div class="col-sm-4">
+                {!! Form::number('denda_keterlambatan', null, ['class' => 'form-control', 'id' => 'denda_keterlambatan', 'readonly']) !!}
+            </div>
+        </div>
+
+        <div class="form-group">
             <label class="col-sm-2 control-label">Total Tagihan</label>
             <div class="col-sm-4">
                 {!! Form::number('tagihan', null, ['class' => 'form-control', 'id' => 'tagihan', 'readonly']) !!}

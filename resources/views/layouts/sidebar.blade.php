@@ -79,6 +79,12 @@
                 <p>Bank Accounts</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{ url('kas') }}" class="nav-link">
+                <i class="fa fa-wallet nav-icon"></i>
+                <p>Buku Kas</p>
+              </a>
+            </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
