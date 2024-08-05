@@ -1,13 +1,13 @@
 <div class="form-group">
-     <label class="col-sm-2 control-label">Jenis Bank</label>
+     <label class="col-sm-2 control-label">Jenis Wallet</label>
      <div class="col-sm-4">
-         {!! Form::text('jenis_bank', null, ['class'=>'form-control','Placeholder'=>'BCA, BNI, BRI, Mandiri, Dana, dll.']) !!}
+         {!! Form::text('jenis', null, ['class'=>'form-control','Placeholder'=>'BCA, BNI, BRI, Mandiri, Dana, dll.']) !!}
      </div>
 </div>
 <div class="form-group">
-     <label class="col-sm-2 control-label">Kode Bank</label>
+     <label class="col-sm-2 control-label">Kode</label>
      <div class="col-sm-4">
-         {!! Form::number('kode_bank', null, ['class'=>'form-control','Placeholder'=>'002, 003, 004, dll.']) !!}
+         {!! Form::number('kode', null, ['class'=>'form-control','Placeholder'=>'002, 003, 004, dll.']) !!}
      </div>
 </div>
 <div class="form-group">
@@ -25,6 +25,6 @@
 <div class="form-group">
      <div class="col-sm-offset-2 col-sm-10">
          <button type="submit" class="btn btn-success btn btn-sm"><i class="fa fa-save" aria-hidden="true"></i> Simpan</button>
-         <a href="/bank" class="btn btn-danger btn btn-sm"><i class="fa fa-share" aria-hidden="true"></i> Kembali</a>
+         <a href="/wallet" class="btn btn-danger btn btn-sm"><i class="fa fa-share" aria-hidden="true"></i> Kembali</a>
      </div>
 </div>

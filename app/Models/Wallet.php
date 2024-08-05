@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Bank extends Model
+class Wallet extends Model
 {
     use HasFactory, Uuids, SoftDeletes;
 
-    protected $table = "bank";
-    protected $fillable = ['jenis_bank','kode_bank','nomor_rekening','nama_rekening'];
+    protected $table = "wallet";
+    protected $fillable = ['jenis','kode','nomor_rekening','nama_rekening'];
 }

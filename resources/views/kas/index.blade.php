@@ -30,7 +30,7 @@
                                    @include('alert')
                                    <div class="col-12 col-sm-6 col-md-3">
                                         <div class="info-box">
-                                          <span class="info-box-icon bg-info elevation-1"><i class="fa fa-rupiah"></i></span>
+                                          <span class="info-box-icon bg-info elevation-1"><i class="bi bi-cash-stack"></i></span>
                             
                                           <div class="info-box-content">
                                             <span class="info-box-text">Total Kas</span>

@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Bank;
+use App\Models\Wallet;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -10,18 +10,18 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
-class BankExport implements FromView, ShouldAutoSize, WithEvents
+class WalletExport implements FromView, ShouldAutoSize, WithEvents
 {
     public function view(): View
     {
-        return view('bank.excel', [
-            'bank' => Bank::all()
+        return view('wallet.excel', [
+            'wallet' => Wallet::all()
         ]);
     }
 
     public function registerEvents(): array
     {
-        $jmlData = Bank::all()->count() + 1;
+        $jmlData = Wallet::all()->count() + 1;
         return [
             AfterSheet::class    => function (AfterSheet $event) use ($jmlData) {
                 $cellRange = 'A1:E1'; // All headers

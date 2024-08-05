@@ -25,8 +25,8 @@ Route::get('/asset/export-excel', 'App\Http\Controllers\AssetController@export_e
 Route::resource('/asset', 'App\Http\Controllers\AssetController');
 Route::get('/abonemen/export-excel', 'App\Http\Controllers\AbonemenController@export_excel')->name('abonemen.export_excel');
 Route::resource('/abonemen', 'App\Http\Controllers\AbonemenController');
-Route::get('/bank/export-excel', 'App\Http\Controllers\BankController@export_excel')->name('bank.export_excel');
-Route::resource('/bank', 'App\Http\Controllers\BankController');
+Route::get('/wallet/export-excel', 'App\Http\Controllers\WalletController@export_excel')->name('wallet.export_excel');
+Route::resource('/wallet', 'App\Http\Controllers\WalletController');
 Route::get('/pemakaian/export-excel', 'App\Http\Controllers\PemakaianController@export_excel')->name('pemakaian.export_excel');
 Route::resource('/pemakaian', 'App\Http\Controllers\PemakaianController');
 Route::get('/getLastMeterAkhir/{pelanggan_id}', 'App\Http\Controllers\PemakaianController@getLastMeterAkhir')->name('getLastMeterAkhir');

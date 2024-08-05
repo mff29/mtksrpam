@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Bank')
+@section('title','Wallets')
 @section('content')
 <div class="content-wrapper">
      <!-- Main content -->
@@ -9,7 +9,7 @@
                     <div class="col-12">
                          <div class="card mt-3">
                               <div class="card-header">
-                                   <h3 class="card-title">DATA BANK</h3>
+                                   <h3 class="card-title">DATA WALLETS</h3>
                                    <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                              <i class="fas fa-minus"></i>
@@ -18,22 +18,22 @@
                               </div>
                               <div class="card-body">
                                    <div class="d-flex justify-content-between mb-3">
-                                        <a href="{{route('bank.create')}}" class="btn btn-info btn-social">
+                                        <a href="{{route('wallet.create')}}" class="btn btn-info btn-social">
                                              <i class="fa fa-plus" aria-hidden="true"></i> Tambah Data
                                         </a>
                                         <div>
-                                             <a href="/bank/export-excel" class="btn btn-success mr-1"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
-                                             <a href="/bank/export-pdf" class="btn btn-danger"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
+                                             <a href="/wallet/export-excel" class="btn btn-success mr-1"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
+                                             <a href="/wallet/export-pdf" class="btn btn-danger"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
                                         </div>
                                    </div>
                                    <hr>
                                    @include('alert')
-                                   <table class="table table-bordered table-striped" id="bank-table">
+                                   <table class="table table-bordered table-striped" id="wallet-table">
                                         <thead>
                                              <tr>
                                                   <th width="10">No</th>
-                                                  <th>Jenis Bank</th>
-                                                  <th>Kode Bank</th>
+                                                  <th>Jenis</th>
+                                                  <th>Kode</th>
                                                   <th>Nomor Rekening</th>
                                                   <th>Nama Rekening</th>
                                                   <th width="90">#</th>
@@ -61,14 +61,14 @@
 
 <script type="text/javascript">
      $(function() {
-        $('#bank-table').DataTable({
+        $('#wallet-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '/bank',
+            ajax: '/wallet',
             columns: [
                 {data: 'DT_RowIndex', orderable: false, searchable: false},
-                { data: 'jenis_bank', name: 'jenis_bank' },
-                { data: 'kode_bank', name: 'kode_bank' },
+                { data: 'jenis', name: 'jenis' },
+                { data: 'kode', name: 'kode' },
                 { data: 'nomor_rekening', name: 'nomor_rekening' },
                 { data: 'nama_rekening', name: 'nama_rekening' },
                 { data: 'action', name: 'action', orderable: false, searchable: false }
@@ -93,7 +93,7 @@
                     $.ajax({
                          type: "DELETE",
                          data:{ _token: '{{csrf_token()}}'},
-                         url: "/bank/" + dataId, // Ganti dengan URL yang sesuai
+                         url: "/wallet/" + dataId, // Ganti dengan URL yang sesuai
                          success: function(response) {
                               swal({
                                    title: "Sukses",

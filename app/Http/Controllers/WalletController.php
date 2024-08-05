@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Bank;
+use App\Models\Wallet;
 use Yajra\DataTables\Facades\DataTables;
-use App\Exports\BankExport;
+use App\Exports\WalletExport;
 use Maatwebsite\Excel\Facades\Excel;
 
-class BankController extends Controller
+class WalletController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class BankController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            return DataTables::of(Bank::all())
+            return DataTables::of(Wallet::all())
             ->addColumn('action', function($row){
-                $btn = "<a href='/bank/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'><i class='fa fa-edit'></i></a>";
+                $btn = "<a href='/wallet/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'><i class='fa fa-edit'></i></a>";
                 $btn .= '<button type="button" onclick="alert_delete(\'' . $row->id . '\')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                 return $btn;
             })
@@ -27,7 +27,7 @@ class BankController extends Controller
             ->make(true);
         }
 
-        return view('bank.index');
+        return view('wallet.index');
     }
 
     /**
@@ -35,7 +35,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        return view('bank.create');
+        return view('wallet.create');
     }
 
     /**
@@ -44,15 +44,15 @@ class BankController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_bank' => 'required',
-            'nomor_rekening' => 'required|unique:bank,nomor_rekening',
+            'jenis' => 'required',
+            'nomor_rekening' => 'required|unique:wallet,nomor_rekening',
             'nama_rekening' => 'required',
         ]);
 
-        $data = Bank::create($request->all());
+        $data = Wallet::create($request->all());
         $data->save();
 
-        return redirect(route('bank.index'));
+        return redirect(route('wallet.index'));
     }
 
     /**
@@ -68,8 +68,8 @@ class BankController extends Controller
      */
     public function edit(string $id)
     {
-        $data['bank'] = Bank::findOrFail($id);
-        return view('bank.edit', $data);
+        $data['wallet'] = Wallet::findOrFail($id);
+        return view('wallet.edit', $data);
     }
 
     /**
@@ -78,14 +78,14 @@ class BankController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'jenis_bank' => 'required',
+            'jenis' => 'required',
             'nomor_rekening' => 'required',
             'nama_rekening' => 'required',
         ]);
-        $bank = Bank::findOrFail($id);
-        $bank->update($request->all());
+        $Wallet = Wallet::findOrFail($id);
+        $Wallet->update($request->all());
 
-        return redirect(route('bank.index'));
+        return redirect(route('wallet.index'));
     }
 
     /**
@@ -93,12 +93,12 @@ class BankController extends Controller
      */
     public function destroy(string $id)
     {
-        $bank = Bank::findOrFail($id);
-        return $bank->delete();
+        $wallet = Wallet::findOrFail($id);
+        return $wallet->delete();
     }
 
     public function export_excel(){
         $now = date("Y-m-d H:i:s");
-        return Excel::download(new BankExport, 'Bank '. $now .'.xlsx');
+        return Excel::download(new WalletExport, 'Wallet '. $now .'.xlsx');
     }
 }

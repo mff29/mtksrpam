@@ -45,43 +45,43 @@
             </li>
             <li class="nav-item">
               <a href="{{ url('tagihan') }}" class="nav-link">
-                <i class="fa fa-money-bill nav-icon"></i>
+                <i class="bi bi-receipt-cutoff nav-icon"></i>
                 <p>Tagihan</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{{ url('pemakaian') }}" class="nav-link">
-                <i class="fa fa-water nav-icon"></i>
+                <i class="bi bi-droplet-half nav-icon"></i>
                 <p>Pemakaian</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{{ url('pelanggan') }}" class="nav-link">
-                <i class="fa fa-users nav-icon"></i>
+                <i class="bi bi-people nav-icon"></i>
                 <p>Data Pelanggan</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{{ url('abonemen') }}" class="nav-link">
-                <i class="fa fa-tag nav-icon"></i>
+                <i class="bi bi-tags nav-icon"></i>
                 <p>Abonemen</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{{ url('asset') }}" class="nav-link">
-                <i class="fa fa-database nav-icon"></i>
+                <i class="bi bi-database nav-icon"></i>
                 <p>Asset</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ url('bank') }}" class="nav-link">
-                <i class="fa fa-wallet nav-icon"></i>
-                <p>Bank Accounts</p>
+              <a href="{{ url('wallet') }}" class="nav-link">
+                <i class="bi bi-wallet2 nav-icon"></i>
+                <p>Wallets</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{{ url('kas') }}" class="nav-link">
-                <i class="fa fa-wallet nav-icon"></i>
+                <i class="bi bi-journals nav-icon"></i>
                 <p>Buku Kas</p>
               </a>
             </li>

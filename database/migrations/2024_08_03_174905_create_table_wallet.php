@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bank', function (Blueprint $table) {
+        Schema::create('wallet', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('jenis_bank');
-            $table->string('kode_bank')->nullable();
+            $table->string('jenis');
+            $table->string('kode')->nullable();
             $table->string('nomor_rekening')->unique();
             $table->string('nama_rekening');
             $table->timestamps();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bank');
+        Schema::dropIfExists('wallet');
     }
 };
