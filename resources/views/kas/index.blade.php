@@ -28,20 +28,18 @@
                                    </div>
                                    <hr>
                                    @include('alert')
-                                   <table class="table table-striped kas-table">
-                                        <tr>
-                                             <th>Bulan</th>
-                                             <th>Pendapatan</th>
-                                             <th>Pengeluaran</th>
-                                             <th>Total</th>
-                                        </tr>
-                                        <tr>
-                                             <td>Lunas</td>
-                                             <td>{{ $totalkas }}</td>
-                                             <td>kosong dulu</td>
-                                             <td>{{ $totalkas }}</td>
-                                        </tr>
-                                   </table>
+                                   <div class="col-12 col-sm-6 col-md-3">
+                                        <div class="info-box">
+                                          <span class="info-box-icon bg-info elevation-1"><i class="fa fa-rupiah"></i></span>
+                            
+                                          <div class="info-box-content">
+                                            <span class="info-box-text">Total Kas</span>
+                                            <span class="info-box-number">{{ $totalkas }}</span>
+                                          </div>
+                                          <!-- /.info-box-content -->
+                                        </div>
+                                        <!-- /.info-box -->
+                                      </div>
                               </div>
                               <!-- /.card-body -->
                               <div class="card-footer">

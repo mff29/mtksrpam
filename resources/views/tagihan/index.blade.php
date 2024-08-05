@@ -38,6 +38,7 @@
                     <th>Harga Per Meter</th>
                     <th>Jumlah Pakai</th>
                     <th>Administrasi</th>
+                    <th>Denda Keterlambatan</th>
                     <th>Total Tagihan</th>
                     <th>Jenis Bayar</th>
                     <th>Status</th>
@@ -78,6 +79,7 @@
                     { data: 'harga_per_meter', name: 'harga_per_meter' },
                     { data: 'jumlah_pakai', name: 'jumlah_pakai' },
                     { data: 'administrasi', name: 'administrasi' },
+                    { data: 'denda_keterlambatan', name: 'denda_keterlambatan' },
                     { data: 'tagihan', name: 'tagihan' },
                     { data: 'jenis_bayar', name: 'jenis_bayar' },
                     {
