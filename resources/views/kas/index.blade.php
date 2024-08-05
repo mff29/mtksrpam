@@ -28,18 +28,25 @@
                                    </div>
                                    <hr>
                                    @include('alert')
-                                   <div class="col-12 col-sm-6 col-md-3">
-                                        <div class="info-box">
-                                          <span class="info-box-icon bg-info elevation-1"><i class="bi bi-cash-stack"></i></span>
-                            
-                                          <div class="info-box-content">
-                                            <span class="info-box-text">Total Kas</span>
-                                            <span class="info-box-number">{{ $totalkas }}</span>
-                                          </div>
-                                          <!-- /.info-box-content -->
+                                   <div class="d-flex justify-between">
+                                        <div class="info-box col-sm-4 mr-3">
+                                             <span class="info-box-icon bg-success elevation-1"><i class="bi bi-clipboard2-plus-fill"></i></span>
+                                             <div class="info-box-content">
+                                                  <span class="info-box-text">TOTAL PENDAPATAN</span>
+                                                  <h4 class="info-box-number">RP {{ $pemasukan }}</h4>
+                                             </div>
+                                             <!-- /.info-box-content -->
+                                        </div>
+                                        <div class="info-box col-sm-4">
+                                             <span class="info-box-icon bg-danger elevation-1"><i class="bi bi-clipboard2-minus-fill"></i></span>
+                                             <div class="info-box-content">
+                                                  <span class="info-box-text">TOTAL PENGELUARAN</span>
+                                                  <h4 class="info-box-number">ini pengeluaran</h4>
+                                             </div>
+                                             <!-- /.info-box-content -->
                                         </div>
                                         <!-- /.info-box -->
-                                      </div>
+                                   </div>
                               </div>
                               <!-- /.card-body -->
                               <div class="card-footer">
