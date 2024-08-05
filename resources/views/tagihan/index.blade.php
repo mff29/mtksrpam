@@ -85,7 +85,8 @@
                             var badgeClass = data === 'Lunas' ? 'bg-success' : 'bg-danger';
                             return '<span class="badge ' + badgeClass + '" data-id="' + row.id + '">' + data + '</span>';
                         }
-                    }
+                    },
+                    { data: 'action', name: 'action' },
                 ],
                 drawCallback: function() {
                     $('#tagihan-table .badge').each(function() {
