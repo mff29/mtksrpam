@@ -34,7 +34,6 @@
                                                   <th width="10">No</th>
                                                   <th>Nama Pelanggan</th>
                                                   <th>Bulan</th>
-                                                  <th>Tahun</th>
                                                   <th>Meter Awal</th>
                                                   <th>Meter Akhir</th>
                                                   <th>Jumlah Pakai</th>
@@ -71,7 +70,6 @@
                     {data: 'DT_RowIndex', orderable: false, searchable: false},
                     { data: 'pelanggan.nama', name: 'pelanggan.nama' },
                     { data: 'bulan', name: 'bulan' },
-                    { data: 'tahun', name: 'tahun' },
                     { data: 'meter_awal', name: 'meter_awal', orderable: false, searchable: false },
                     { data: 'meter_akhir', name: 'meter_akhir', orderable: false, searchable: false },
                     { data: 'pakai', name: 'pakai' },

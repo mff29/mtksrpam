@@ -55,7 +55,6 @@ class PemakaianController extends Controller
         $request->validate([
             'pelanggan_id' => 'required',
             'bulan' => 'required',
-            'tahun' => 'required',
             'meter_akhir' => 'required',
             'pakai' => 'required',
         ]);

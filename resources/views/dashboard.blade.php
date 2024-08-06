@@ -43,8 +43,8 @@
               <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Total Kas</span>
-                <span class="info-box-number">{{ $total_kas }}</span>
+                <span class="info-box-text">Total Uang Air</span>
+                <span class="info-box-number">{{ $uang_air }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>

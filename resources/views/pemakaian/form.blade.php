@@ -1,20 +1,14 @@
 <div class="form-group">
     <label class="col-sm-2 control-label">Nama Pelanggan</label>
     <div class="col-sm-4">
-        {!! Form::select('pelanggan_id', $pelanggan, null, ['class'=>'form-control','placeholder'=>'Select....', 'required']) !!}
+        {!! Form::select('pelanggan_id', $pelanggan, null, ['class'=>'form-control select2','placeholder'=>'Select....', 'required']) !!}
     </div>
 </div>
 <div class="form-group">
-     <label class="col-sm-2 control-label">Bulan</label>
+     <label class="col-sm-2 control-label">Month</label>
      <div class="col-sm-4">
-         {!! Form::select('bulan',['Januari'=>'Januari','Februari'=>'Februari','Maret'=>'Maret','April'=>'April','Mei'=>'Mei','Juni'=>'Juni','Juli'=>'Juli','Agustus'=>'Agustus','September'=>'September','Oktober'=>'Oktober','November'=>'November','Desember'=>'Desember'], null, ['class'=>'form-control','placeholder'=>'Select bulan....', 'required']) !!}
-     </div>
-</div>
-<div class="form-group">
-     <label class="col-sm-2 control-label">Tahun</label>
-     <div class="col-sm-4">
-         {!! Form::number('tahun', null, ['class'=>'form-control','Placeholder'=>'Tahun', 'required']) !!}
-     </div>
+        {!! Form::month('bulan', \Carbon\Carbon::now()->format('Y-m'), ['class' => 'form-control']) !!}
+    </div>
 </div>
 <div class="form-group">
      <label class="col-sm-2 control-label">Meter Awal</label>

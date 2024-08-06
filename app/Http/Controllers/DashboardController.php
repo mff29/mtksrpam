@@ -13,7 +13,7 @@ class DashboardController extends Controller
         $data['pelanggan'] = Pelanggan::all();
         $data['tagihan_lunas'] = Tagihan::where('status','lunas')->count('tagihan');
         $data['belum_lunas'] = Tagihan::where('status','belum lunas')->count('tagihan');
-        $data['total_kas'] = Tagihan::where('status','lunas')->sum('tagihan');
+        $data['uang_air'] = Tagihan::where('status','lunas')->sum('tagihan');
         
         return view('dashboard',$data);
     }

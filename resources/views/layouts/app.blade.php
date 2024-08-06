@@ -17,12 +17,29 @@
   {{-- DataTables --}}
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css" />
   <script src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
+
+  {{-- Select2 --}}
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <style>
+      .select2-container .select2-selection--single {
+          height: 34px;
+          border: 1px solid #ced4da;
+          display: flex;
+          align-items: center;
+      }
+      .select2-container--default .select2-selection--single .select2-selection__rendered {
+          line-height: 34px;
+      }
+      .select2-container--default .select2-selection--single .select2-selection__arrow {
+          height: 34px;
+      }
+  </style>
+  
   <style>
     .main-sidebar {
             box-shadow: none !important;
         }
   </style>
-  
   @stack('css')
 </head>
 <!--

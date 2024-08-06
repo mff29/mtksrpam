@@ -22,6 +22,28 @@
      </div>
 @endsection
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            templateResult: function(data) {
+                if (!data.id) {
+                    return data.text;
+                }
+                var $result = $('<span style="display: block;">' + data.text + '</span>');
+                return $result;
+            },
+            templateSelection: function(data) {
+                if (!data.id) {
+                    return data.text;
+                }
+                var $result = $('<span style="display: block;">' + data.text + '</span>');
+                return $result;
+            }
+        });
+    });
+</script>
+
 <script>
         document.addEventListener('DOMContentLoaded', function () {
             const pelangganSelect = document.querySelector('select[name="pelanggan_id"]');
@@ -53,4 +75,7 @@
             });
         });
 </script>
+@endpush
+@push('css')
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 @endpush

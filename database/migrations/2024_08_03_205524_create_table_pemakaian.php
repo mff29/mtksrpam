@@ -15,7 +15,6 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('pelanggan_id');
             $table->string('bulan');
-            $table->string('tahun');
             $table->integer('meter_awal');
             $table->integer('meter_akhir');
             $table->integer('pakai');
