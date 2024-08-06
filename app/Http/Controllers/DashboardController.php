@@ -13,9 +13,9 @@ class DashboardController extends Controller
     {
         $data['pelanggan'] = Pelanggan::all();
 
-        $data['total_pendapatan'] = Kas::sum('nominal_pendapatan');
-        $data['total_pengeluaran'] = Kas::sum('nominal_pengeluaran');
-        $data['jumlah_kas'] = $data['total_pendapatan'] - $data['total_pengeluaran'];
+        $data['pendapatan_kas'] = Kas::where('tipe','PENDAPATAN')->sum('nominal');
+        $data['pengeluaran_kas'] = Kas::where('tipe','PENGELUARAN')->sum('nominal');
+        $data['jumlah_kas'] = $data['pendapatan_kas'] - $data['pengeluaran_kas'];
         
         $data['pendapatan_air'] = Tagihan::where('status','lunas')->sum('tagihan');
         $data['total_uang_kas'] = $data['jumlah_kas'] + $data['pendapatan_air'];

@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('kas', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->date('tgl');
             $table->string('tipe');
             $table->string('deskripsi');
-            $table->integer('nominal_pendapatan');
-            $table->integer('nominal_pengeluaran');
+            $table->integer('nominal');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

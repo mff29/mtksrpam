@@ -13,21 +13,21 @@
                                         <span class="info-box-icon bg-success elevation-1"><i class="bi bi-cash-stack"></i></span>
                                         <div class="info-box-content">
                                              <span class="info-box-text">TOTAL UANG KAS</span>
-                                             <h5 class="info-box-number">RP {{ number_format($total_uang_kas) }}</h5>
+                                             <h5 class="info-box-number">RP {{ number_format($total_uang_kas,0,',','.') }}</h5>
                                         </div>
                                    </div>
                                    <div class="info-box col-3 mr-3">
-                                        <span class="info-box-icon bg-info elevation-1"><i class="bi bi-droplet"></i></span>
+                                        <span class="info-box-icon bg-blue elevation-1"><i class="bi bi-droplet"></i></span>
                                         <div class="info-box-content">
                                              <span class="info-box-text">TOTAL PENDAPATAN AIR</span>
-                                             <span class="info-box-number">RP {{ number_format($pendapatan_air) }}</span>
+                                             <span class="info-box-number">RP {{ number_format($pendapatan_air,0,',','.') }}</span>
                                         </div>
                                    </div>
                                    <div class="info-box col-3">
                                         <span class="info-box-icon bg-warning elevation-1"><i class="bi bi-clipboard2"></i></span>
                                         <div class="info-box-content">
                                              <span class="info-box-text">JUMLAH KAS</span>
-                                             <span class="info-box-number">RP {{ number_format($jumlah_kas) }}</span>
+                                             <span class="info-box-number">RP {{ number_format($jumlah_kas,0,',','.') }}</span>
                                         </div>
                                    </div>
                               </div>
@@ -59,17 +59,16 @@
                                                   <th width="10">No</th>
                                                   <th>Tipe</th>
                                                   <th>Deskripsi</th>
-                                                  <th>Nominal Pendapatan</th>
-                                                  <th>Nominal Pengeluaran</th>
+                                                  <th>Nominal</th>
                                                   <th>#</th>
                                              </tr>
                                         </thead>
-                                        <tfoot>
+                                        <tfoot class="bg-lime">
                                              <tr>
-                                                  <th colspan="3">Total</th>
-                                                  <th>RP {{ number_format($total_pendapatan) }}</th>
-                                                  <th>RP {{ number_format($total_pengeluaran) }}</th>
-                                                  <th>= RP {{ number_format($jumlah_kas) }}</th>
+                                                  <th colspan="2">Total</th>
+                                                  <th>+ RP {{ number_format($pendapatan_kas,0,',','.') }}</th>
+                                                  <th>- RP {{ number_format($pengeluaran_kas,0,',','.') }}</th>
+                                                  <th>= RP {{ number_format($jumlah_kas,0,',','.') }}</th>
                                              </tr>
                                         </tfoot>
                                    </table>
@@ -102,8 +101,7 @@
                     {data: 'DT_RowIndex', orderable: false, searchable: false},
                     { data: 'tipe', name: 'tipe' },
                     { data: 'deskripsi', name: 'deskripsi' },
-                    { data: 'nominal_pendapatan', name: 'nominal_pendapatan' },
-                    { data: 'nominal_pengeluaran', name: 'nominal_pengeluaran' },
+                    { data: 'nominal', name: 'nominal' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                ]
           });

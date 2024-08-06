@@ -1,7 +1,13 @@
 <div class="form-group">
+    <label class="col-sm-2 control-label">Tanggal</label>
+    <div class="col-sm-4">
+        {!! Form::date('tgl', null, ['class'=>'form-control']) !!}
+    </div>
+</div>
+<div class="form-group">
      <label class="col-sm-2 control-label">Tipe</label>
      <div class="col-sm-4">
-         {!! Form::select('tipe',['Pendapatan'=>'Pendapatan','Pengeluaran'=>'Pengeluaran'], null, ['class'=>'form-control','Placeholder'=>'Select Tipe']) !!}
+         {!! Form::select('tipe',['PENDAPATAN'=>'PENDAPATAN','PENGELUARAN'=>'PENGELUARAN'], null, ['class'=>'form-control','Placeholder'=>'Select Tipe']) !!}
     </div>
 </div>
 <div class="form-group">
@@ -15,6 +21,12 @@
      <div class="col-sm-4">
          {!! Form::number('nominal', null, ['class'=>'form-control','Placeholder'=>'Jumlah Nominal', 'required']) !!}
      </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">Keterangan</label>
+    <div class="col-sm-4">
+        {!! Form::text('keterangan', null, ['class'=>'form-control','Placeholder'=>'Keterangan']) !!}
+    </div>
 </div>
 
 <div class="form-group">

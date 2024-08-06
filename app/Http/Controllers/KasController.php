@@ -14,9 +14,9 @@ class KasController extends Controller
      */
     public function index(Request $request)
     {
-        $data['total_pendapatan'] = Kas::sum('nominal_pendapatan');
-        $data['total_pengeluaran'] = Kas::sum('nominal_pengeluaran');
-        $data['jumlah_kas'] = $data['total_pendapatan'] - $data['total_pengeluaran'];
+        $data['pendapatan_kas'] = Kas::where('tipe','PENDAPATAN')->sum('nominal');
+        $data['pengeluaran_kas'] = Kas::where('tipe','PENGELUARAN')->sum('nominal');
+        $data['jumlah_kas'] = $data['pendapatan_kas'] - $data['pengeluaran_kas'];
         $data['pendapatan_air'] = Tagihan::where('status','lunas')->sum('tagihan');
         $data['total_uang_kas'] = $data['jumlah_kas'] + $data['pendapatan_air'];
         $data['kas'] = Kas::all();
@@ -55,16 +55,9 @@ class KasController extends Controller
             'nominal' => 'required',
         ]);
 
-        $data = $request->all();
-        if ($data['tipe'] == 'pendapatan') {
-            $data['nominal_pendapatan'] = $data['nominal'];
-            $data['nominal_pengeluaran'] = 0;
-        } else {
-            $data['nominal_pengeluaran'] = $data['nominal'];
-            $data['nominal_pendapatan'] = 0;
-        }
 
-        Kas::create($data);
+        $data = Kas::create($request->all());
+        $data->save();
 
         return redirect(route('kas.index'));
     }

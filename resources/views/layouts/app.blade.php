@@ -39,6 +39,10 @@
     .main-sidebar {
             box-shadow: none !important;
         }
+    thead{
+      background-color: #0000FF;
+      color: #FFF
+    }
   </style>
   @stack('css')
 </head>

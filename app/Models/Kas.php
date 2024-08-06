@@ -12,5 +12,5 @@ class Kas extends Model
     use HasFactory, Uuids, SoftDeletes;
 
     protected $table = "kas";
-    protected $fillable = ['tipe','deskripsi','nominal_pendapatan','nominal_pengeluaran'];
+    protected $fillable = ['tgl','tipe','deskripsi','nominal','keterangan'];
 }

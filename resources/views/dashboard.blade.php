@@ -39,10 +39,10 @@
           <!-- /.col -->
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box">
-              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+              <span class="info-box-icon bg-blue elevation-1"><i class="bi bi-droplet"></i></span>
               <div class="info-box-content">
                 <span class="info-box-text">Total Uang Air</span>
-                <span class="info-box-number">{{ $pendapatan_air }}</span>
+                <span class="info-box-number">RP {{ number_format($pendapatan_air,0,',','.') }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -54,7 +54,7 @@
               <span class="info-box-icon bg-success elevation-1"><i class="bi bi-cash-stack"></i></span>
               <div class="info-box-content">
                 <span class="info-box-text">TOTAL UANG KAS</span>
-                <span class="info-box-number">{{ number_format($total_uang_kas) }}</span>
+                <span class="info-box-number">RP {{ number_format($total_uang_kas,0,',','.') }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
