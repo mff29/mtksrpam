@@ -41,7 +41,6 @@
         </div>
 
         <div class="form-group">
-            {{-- {!! Form::label('keterlambatan', 'Keterlambatan') !!} --}}
             <label for="keterlambatan" class="col-sm-2 control-label">Keterlambatan</label>
             <div class="col-sm-4">
                 {!! Form::select('telat', ['Tidak' => 'Tidak', 'Ya' => 'Ya'], null, ['class' => 'form-control', 'id' => 'keterlambatan','placeholder'=>'Select keterlambatan']) !!}
@@ -72,7 +71,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Status</label>
             <div class="col-sm-4">
-                {!! Form::select('status',['Belum Lunas'=>'Belum Lunas', 'Lunas'=>'Lunas'], null, ['class'=>'form-control', 'placeholder'=>'Pilih Status']) !!}
+                {!! Form::select('status',['PENDING'=>'PENDING', 'LUNAS'=>'LUNAS'], null, ['class'=>'form-control']) !!}
             </div>
         </div>
 

@@ -26,11 +26,6 @@ class TagihanController extends Controller
             ->addColumn('pemakaian', function ($row) {
                 return $row->pemakaian->bulan . ' ' . $row->pemakaian->tahun;
             })
-            ->editColumn('status', function ($row) {
-                return $row->status === 'Lunas'
-                    ? '<span class="badge bg-success">Lunas</span>'
-                    : '<span class="badge bg-danger">Belum Lunas</span>';
-            })
             ->rawColumns(['action','status','code'])
             ->addIndexColumn()
             ->make(true);

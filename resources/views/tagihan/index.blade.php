@@ -34,8 +34,8 @@
                                                 <th>Pelanggan</th>
                                                 <th>Pemakaian</th>
                                                 <th>Abonemen</th>
-                                                <th>Harga/M3</th>
-                                                <th>Jumlah Pakai</th>
+                                                <th>Harga</th>
+                                                <th>Air M3</th>
                                                 <th>Administrasi</th>
                                                 <th>Denda</th>
                                                 <th>Total</th>
@@ -78,69 +78,21 @@
                     { data: 'jenis_bayar', name: 'jenis_bayar' },
                     {
                         data: 'status',
-                        name: 'status',
-                    //     orderable: false,
-                    //     searchable: false,
-                        render: function (data, type, row) {
-                            var badgeClass = data === 'Lunas' ? 'bg-success' : 'bg-danger';
-                            return '<span class="badge ' + badgeClass + '" data-id="' + row.id + '">' + data + '</span>';
-                        }
+                        name: 'status', render: function(data, type, row) {
+                              if (data == 'PENDING') {
+                              return '<span class="badge bg-warning">PENDING</span>';
+                              } else if (data === 'LUNAS') {
+                              return '<span class="badge bg-success">LUNAS</span>';
+                              } else {
+                              return '<span class="badge bg-danger">' + data + '</span>';
+                              }
+                         }
                     },
                     { data: 'action', name: 'action' },
-                ],
-                drawCallback: function() {
-                    $('#tagihan-table .badge').each(function() {
-                        var badge = $(this);
-                        var text = badge.text();
-                        var badgeClass = text === 'Lunas' ? 'bg-success' : 'bg-danger';
-                        badge.removeClass('bg-success bg-danger');
-                        badge.addClass(badgeClass);
-                    });
-                }
-            });
-
-            $('#tagihan-table').on('click', '.badge', function() {
-                var badge = $(this);
-                var id = badge.data('id');
-                var currentStatus = badge.text();
-                var newStatus = currentStatus === 'Lunas' ? 'Belum Lunas' : 'Lunas';
-
-                Swal.fire({
-                    title: 'Konfirmasi',
-                    text: 'Apakah Anda yakin ingin mengubah status tagihan ini menjadi ' + newStatus + '?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Ya, ubah!',
-                    cancelButtonText: 'Batal'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: '{{ url("/tagihan/update-status/") }}/' + id,
-                            type: 'POST',
-                            data: {
-                                _token: '{{ csrf_token() }}',
-                                status: newStatus
-                            },
-                            success: function(response) {
-                                if (response.success) {
-                                    badge.text(newStatus);
-                                    badge.removeClass('bg-success bg-danger');
-                                    badge.addClass(newStatus === 'Lunas' ? 'bg-success' : 'bg-danger');
-                                }
-                            }
-                        });
-                        Swal.fire(
-                            'Berhasil!',
-                            'Status tagihan telah diubah.',
-                            'success'
-                        );
-                    }
-                });
+                ]
             });
         });
-    </script>
+</script>
 
 <script type="text/javascript">
         function alert_delete(id) {

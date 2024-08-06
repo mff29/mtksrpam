@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('meter_awal');
             $table->integer('meter_akhir');
             $table->integer('pakai');
+            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
         });

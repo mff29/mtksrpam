@@ -37,6 +37,7 @@
                                                   <th>Meter Awal</th>
                                                   <th>Meter Akhir</th>
                                                   <th>Jumlah Pakai</th>
+                                                  <th>Status</th>
                                                   <th width="90">#</th>
                                              </tr>
                                         </thead>
@@ -73,6 +74,17 @@
                     { data: 'meter_awal', name: 'meter_awal', orderable: false, searchable: false },
                     { data: 'meter_akhir', name: 'meter_akhir', orderable: false, searchable: false },
                     { data: 'pakai', name: 'pakai' },
+                    { data: 'status', name: 'status',
+                         render: function(data, type, row) {
+                              if (data == 'PENDING') {
+                              return '<span class="badge bg-warning">PENDING</span>';
+                              } else if (data === 'LUNAS') {
+                              return '<span class="badge bg-success">LUNAS</span>';
+                              } else {
+                              return '<span class="badge bg-danger">' + data + '</span>';
+                              }
+                         }
+                    },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                ]
           });
