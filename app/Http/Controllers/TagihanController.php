@@ -44,9 +44,6 @@ class TagihanController extends Controller
      */
     public function create()
     {
-        // $data['pelanggan'] = Pelanggan::pluck('nama','id');
-        // $data['pemakaian'] = Pemakaian::pluck('pelanggan_id','id');
-        // $data['abonemen'] = Abonemen::pluck('harga','id');
         $data['pelanggans'] = Pelanggan::all();
         $data['abonemens'] = Abonemen::all();
         $data['pemakaians'] = Pemakaian::all();

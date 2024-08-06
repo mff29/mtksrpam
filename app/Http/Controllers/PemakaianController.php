@@ -52,7 +52,9 @@ class PemakaianController extends Controller
      */
     public function create()
     {
-        $data['pelanggan'] = Pelanggan::pluck('nama','id');
+        $data['pelanggan'] = Pelanggan::all()->mapWithKeys(function ($item) {
+            return [$item['id'] => $item['kode'] . ' - ' . $item['nama']];
+        });
         return view('pemakaian.create',$data);
     }
 
