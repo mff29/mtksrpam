@@ -19,7 +19,7 @@ class TagihanController extends Controller
         if($request->ajax()){
             return DataTables::of(Tagihan::with('pelanggan','pemakaian','abonemen')->get())
             ->addColumn('action', function($row){
-                $btn = "<a href='/pemakaian/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'><i class='fa fa-edit'></i></a>";
+                $btn = "<a href='/tagihan/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'><i class='fa fa-edit'></i></a>";
                 $btn .= '<button type="button" onclick="alert_delete(\'' . $row->id . '\')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                 return $btn;
             })
@@ -91,7 +91,12 @@ class TagihanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['pelanggans'] = Pelanggan::all();
+        $data['abonemens'] = Abonemen::all();
+        $data['pemakaians'] = Pemakaian::all();
+        $data['tagihan'] = Tagihan::findOrFail($id);
+        
+        return view('tagihan.edit', $data);
     }
 
     /**

@@ -18,4 +18,8 @@ class Pemakaian extends Model
     {
         return $this->belongsTo(\App\Models\Pelanggan::class);
     }
+    public function tagihan()
+    {
+        return $this->hasMany(\App\Models\Tagihan::class);
+    }
 }

@@ -41,7 +41,7 @@
                                                 <th>Total</th>
                                                 <th>Payment</th>
                                                 <th>Status</th>
-                                                {{-- <th width="90">#</th> --}}
+                                                <th width="90">#</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -86,7 +86,7 @@
                             return '<span class="badge ' + badgeClass + '" data-id="' + row.id + '">' + data + '</span>';
                         }
                     },
-                    // { data: 'action', name: 'action' },
+                    { data: 'action', name: 'action' },
                 ],
                 drawCallback: function() {
                     $('#tagihan-table .badge').each(function() {

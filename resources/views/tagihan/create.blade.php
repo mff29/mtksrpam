@@ -24,6 +24,8 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
+        $('.select2').select2();
+
         $('#pelanggan_id').change(function() {
             var pelanggan_id = $(this).val();
             $.ajax({

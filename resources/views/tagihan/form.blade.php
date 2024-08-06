@@ -1,7 +1,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Nama Pelanggan</label>
             <div class="col-sm-4">
-                {!! Form::select('pelanggan_id', $pelanggans->pluck('nama', 'id'), null, ['class' => 'form-control', 'placeholder' => 'Select Pelanggan', 'id' => 'pelanggan_id']) !!}
+                {!! Form::select('pelanggan_id', $pelanggans->pluck('nama', 'id'), null, ['class' => 'form-control select2', 'placeholder' => 'Select Pelanggan', 'id' => 'pelanggan_id']) !!}
             </div>
         </div>
         
