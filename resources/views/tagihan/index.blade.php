@@ -34,12 +34,12 @@
                                                 <th>Pelanggan</th>
                                                 <th>Pemakaian</th>
                                                 <th>Abonemen</th>
-                                                <th>Harga Per Meter</th>
+                                                <th>Harga/M3</th>
                                                 <th>Jumlah Pakai</th>
-                                                <th>Biaya Administrasi</th>
-                                                <th>Denda Keterlambatan</th>
-                                                <th>Total Tagihan</th>
-                                                <th>Jenis Bayar</th>
+                                                <th>Administrasi</th>
+                                                <th>Denda</th>
+                                                <th>Total</th>
+                                                <th>Payment</th>
                                                 <th>Status</th>
                                                 {{-- <th width="90">#</th> --}}
                                             </tr>
@@ -71,7 +71,7 @@
                     { data: 'pemakaian', name: 'pemakaian' },
                     { data: 'abonemen.level', name: 'abonemen.level' },
                     { data: 'harga_per_meter', name: 'harga_per_meter' },
-                    { data: 'jumlah_pakai', name: 'jumlah_pakai' },
+                    { data: 'jumlah_pakai', name: 'jumlah_pakai'},
                     { data: 'administrasi', name: 'administrasi' },
                     { data: 'denda_keterlambatan', name: 'denda_keterlambatan' },
                     { data: 'tagihan', name: 'tagihan' },
@@ -86,7 +86,7 @@
                             return '<span class="badge ' + badgeClass + '" data-id="' + row.id + '">' + data + '</span>';
                         }
                     },
-                    { data: 'action', name: 'action' },
+                    // { data: 'action', name: 'action' },
                 ],
                 drawCallback: function() {
                     $('#tagihan-table .badge').each(function() {

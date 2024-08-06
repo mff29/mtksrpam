@@ -91,16 +91,7 @@ class KasController extends Controller
         ]);
 
         $kas = Kas::findOrFail($id);
-        $data = $request->all();
-        if ($data['tipe'] == 'pendapatan') {
-            $data['nominal_pendapatan'] = $data['nominal'];
-            $data['nominal_pengeluaran'] = 0;
-        } else {
-            $data['nominal_pengeluaran'] = $data['nominal'];
-            $data['nominal_pendapatan'] = 0;
-        }
-
-        $kas->update($data);
+        $kas->update($request->all());
     
         return redirect(route('kas.index'))->with('message', 'Data berhasil diperbarui');
     }
