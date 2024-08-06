@@ -8,6 +8,7 @@ use App\Models\Pelanggan;
 use Yajra\DataTables\Facades\DataTables;
 use App\Exports\PemakaianExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class PemakaianController extends Controller
 {
@@ -31,12 +32,20 @@ class PemakaianController extends Controller
         return view('pemakaian.index');
     }
 
-    public function getLastMeterAkhir($pelanggan_id)
+    public function getMeterAwal(Request $request)
     {
-        $lastData = Pemakaian::where('pelanggan_id', $pelanggan_id)->latest()->first();
-        $meter_akhir = $lastData ? $lastData->meter_akhir : 0;
+        $pelanggan_id = $request->pelanggan_id;
+        $bulan = $request->bulan;
+        
+        // Menghitung bulan sebelumnya
+        $previousMonth = Carbon::createFromFormat('Y-m', $bulan)->subMonth()->format('Y-m');
 
-        return response()->json(['meter_akhir' => $meter_akhir]);
+        // Mencari nilai meter_akhir dari bulan sebelumnya
+        $latest = Pemakaian::where('pelanggan_id', $pelanggan_id)
+                            ->where('bulan', $previousMonth)
+                            ->first();
+
+        return response()->json(['meter_awal' => $latest ? $latest->meter_akhir : 0]);
     }
     /**
      * Show the form for creating a new resource.
@@ -54,10 +63,17 @@ class PemakaianController extends Controller
     {
         $request->validate([
             'pelanggan_id' => 'required',
-            'bulan' => 'required',
+            'bulan' => 'required|date_format:Y-m',
             'meter_akhir' => 'required',
             'pakai' => 'required',
         ]);
+
+        $exists = Pemakaian::where('pelanggan_id', $request->pelanggan_id)
+                            ->where('bulan', $request->bulan)
+                            ->exists();
+        if ($exists) {
+            return redirect()->back()->withErrors(['error' => 'Data untuk pelanggan dan bulan tersebut sudah ada.'])->withInput();
+        }
 
         $data = Pemakaian::create($request->all());
         $data->save();
@@ -90,7 +106,6 @@ class PemakaianController extends Controller
         $request->validate([
             'pelanggan_id' => 'required',
             'bulan' => 'required',
-            'tahun' => 'required',
             'meter_akhir' => 'required',
             'pakai' => 'required',
         ]);

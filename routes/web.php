@@ -29,7 +29,8 @@ Route::get('/wallet/export-excel', 'App\Http\Controllers\WalletController@export
 Route::resource('/wallet', 'App\Http\Controllers\WalletController');
 Route::get('/pemakaian/export-excel', 'App\Http\Controllers\PemakaianController@export_excel')->name('pemakaian.export_excel');
 Route::resource('/pemakaian', 'App\Http\Controllers\PemakaianController');
-Route::get('/getLastMeterAkhir/{pelanggan_id}', 'App\Http\Controllers\PemakaianController@getLastMeterAkhir')->name('getLastMeterAkhir');
+Route::post('/get-meter-awal', [App\Http\Controllers\PemakaianController::class, 'getMeterAwal'])->name('getMeterAwal');
+
 Route::resource('/tagihan', 'App\Http\Controllers\TagihanController');
 
 Route::get('/getPemakaianByPelanggan/{pelanggan_id}', function($pelanggan_id) {

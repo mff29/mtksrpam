@@ -22,47 +22,31 @@
      </div>
 @endsection
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('.select2').select2({
-            templateResult: function(data) {
-                if (!data.id) {
-                    return data.text;
-                }
-                var $result = $('<span style="display: block;">' + data.text + '</span>');
-                return $result;
-            },
-            templateSelection: function(data) {
-                if (!data.id) {
-                    return data.text;
-                }
-                var $result = $('<span style="display: block;">' + data.text + '</span>');
-                return $result;
-            }
-        });
-    });
-</script>
+        $('.select2').select2();
 
-<script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const pelangganSelect = document.querySelector('select[name="pelanggan_id"]');
-            pelangganSelect.addEventListener('change', function () {
-                const pelangganId = this.value;
-                if (pelangganId) {
-                    fetch(`/getLastMeterAkhir/${pelangganId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            document.querySelector('input[name="meter_awal"]').value = data.meter_akhir !== null ? data.meter_akhir : 0;
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                } else {
-                    document.querySelector('input[name="meter_awal"]').value = 0;
+        $('select[name="pelanggan_id"], input[name="bulan"]').on('change', function() {
+                var pelanggan_id = $('select[name="pelanggan_id"]').val();
+                var bulan = $('input[name="bulan"]').val();
+
+                if (pelanggan_id && bulan) {
+                    $.ajax({
+                        url: '/get-meter-awal',
+                        type: 'POST',
+                        data: {
+                            pelanggan_id: pelanggan_id,
+                            bulan: bulan,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            $('input[name="meter_awal"]').val(data.meter_awal);
+                        }
+                    });
                 }
             });
-        });
+    });
 </script>
 
 <script type="text/javascript">

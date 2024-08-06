@@ -23,25 +23,26 @@
 @endsection
 @push('scripts')
 <script>
-     document.addEventListener('DOMContentLoaded', function () {
-          const pelangganSelect = document.querySelector('select[name="pelanggan_id"]');
-          pelangganSelect.addEventListener('change', function () {
-               const pelangganId = this.value;
-               if (pelangganId) {
-                    fetch(`/getLastMeterAkhir/${pelangganId}`)
-                         .then(response => response.json())
-                         .then(data => {
-                              document.querySelector('input[name="meter_awal"]').value = data.meter_akhir !== null ? data.meter_akhir : 0;
-                         })
-                         .catch(error => {
-                              console.error('Error:', error);
-                         });
-               } else {
-                    document.querySelector('input[name="meter_awal"]').value = 0;
-               }
-          });
+     $(document).ready(function() {
+         $('.select2').select2();
+ 
+         $('select[name="pelanggan_id"]').on('change', function() {
+             var pelanggan_id = $(this).val();
+             if (pelanggan_id) {
+                 $.ajax({
+                     url: '/get-meter-awal/' + pelanggan_id,
+                     type: 'GET',
+                     dataType: 'json',
+                     success: function(data) {
+                         $('input[name="meter_awal"]').val(data.meter_awal);
+                     }
+                 });
+             } else {
+                 $('input[name="meter_awal"]').val('');
+             }
+         });
      });
-</script>
+ </script>
 
 <script type="text/javascript">
      $(document).ready(function() {

@@ -28,7 +28,6 @@
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
               <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
               <div class="info-box-content">
                 <span class="info-box-text">Total Pelanggan</span>
                 <span class="info-box-number">{{ $pelanggan->count() }}</span>
@@ -41,10 +40,9 @@
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box">
               <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
-
               <div class="info-box-content">
                 <span class="info-box-text">Total Uang Air</span>
-                <span class="info-box-number">{{ $uang_air }}</span>
+                <span class="info-box-number">{{ $pendapatan_air }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -53,11 +51,10 @@
           <!-- /.col -->
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
+              <span class="info-box-icon bg-success elevation-1"><i class="bi bi-cash-stack"></i></span>
               <div class="info-box-content">
-                <span class="info-box-text">Tagihan Lunas</span>
-                <span class="info-box-number">{{ $tagihan_lunas }}</span>
+                <span class="info-box-text">TOTAL UANG KAS</span>
+                <span class="info-box-number">{{ number_format($total_uang_kas) }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -71,7 +68,6 @@
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
               <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-shopping-cart"></i></span>
-
               <div class="info-box-content">
                 <span class="info-box-text">Tagihan Belum Lunas</span>
                 <span class="info-box-number">{{ $belum_lunas }}</span>
