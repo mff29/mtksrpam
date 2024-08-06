@@ -8,6 +8,30 @@
                <div class="row">
                     <div class="col-12">
                          <div class="card mt-3">
+                              <div class="d-flex justify-content-between" style="margin: 30px 20px 0;">
+                                   <div class="info-box col-3 mr-3">
+                                        <span class="info-box-icon bg-success elevation-1"><i class="bi bi-cash-stack"></i></span>
+                                        <div class="info-box-content">
+                                             <span class="info-box-text">TOTAL UANG KAS</span>
+                                             <h5 class="info-box-number">RP {{ number_format($total_uang_kas) }}</h5>
+                                        </div>
+                                   </div>
+                                   <div class="info-box col-3 mr-3">
+                                        <span class="info-box-icon bg-info elevation-1"><i class="bi bi-droplet"></i></span>
+                                        <div class="info-box-content">
+                                             <span class="info-box-text">TOTAL PENDAPATAN AIR</span>
+                                             <span class="info-box-number">RP {{ number_format($pendapatan_air) }}</span>
+                                        </div>
+                                   </div>
+                                   <div class="info-box col-3">
+                                        <span class="info-box-icon bg-warning elevation-1"><i class="bi bi-clipboard2"></i></span>
+                                        <div class="info-box-content">
+                                             <span class="info-box-text">JUMLAH KAS</span>
+                                             <span class="info-box-number">RP {{ number_format($jumlah_kas) }}</span>
+                                        </div>
+                                   </div>
+                              </div>
+                              <hr>
                               <div class="card-header">
                                    <h3 class="card-title">DATA BUKU KAS</h3>
                                    <div class="card-tools">
@@ -18,30 +42,6 @@
                               </div>
                               <div class="card-body">
                                    @include('alert')
-                                   <div class="d-flex justify-between">
-                                        <div class="info-box col-3 mr-3">
-                                             <span class="info-box-icon bg-success elevation-1"><i class="bi bi-cash-stack"></i></span>
-                                             <div class="info-box-content">
-                                                  <span class="info-box-text">TOTAL UANG KAS</span>
-                                                  <h5 class="info-box-number">RP {{ number_format($total_uang_kas) }}</h5>
-                                             </div>
-                                        </div>
-                                        <div class="info-box col-3 mr-3">
-                                             <span class="info-box-icon bg-info elevation-1"><i class="bi bi-droplet"></i></span>
-                                             <div class="info-box-content">
-                                                  <span class="info-box-text">TOTAL PENDAPATAN AIR</span>
-                                                  <span class="info-box-number">RP {{ number_format($pendapatan_air) }}</span>
-                                             </div>
-                                        </div>
-                                        <div class="info-box col-3">
-                                             <span class="info-box-icon bg-warning elevation-1"><i class="bi bi-clipboard2"></i></span>
-                                             <div class="info-box-content">
-                                                  <span class="info-box-text">JUMLAH KAS</span>
-                                                  <span class="info-box-number">RP {{ number_format($jumlah_kas) }}</span>
-                                             </div>
-                                        </div>
-                                   </div>
-                                   <hr>
                                    <div class="d-flex justify-content-between mb-3">
                                         <a href="{{route('kas.create')}}" class="btn btn-info btn-social">
                                              <i class="fa fa-plus" aria-hidden="true"></i> Tambah Data Kas
@@ -66,12 +66,12 @@
                                         </thead>
                                         <tfoot>
                                              <tr>
-                                                 <th colspan="3">Total</th>
-                                                 <th>RP {{ number_format($total_pendapatan) }}</th>
-                                                 <th>RP {{ number_format($total_pengeluaran) }}</th>
-                                                 <th>RP {{ number_format($jumlah_kas) }}</th>
+                                                  <th colspan="3">Total</th>
+                                                  <th>RP {{ number_format($total_pendapatan) }}</th>
+                                                  <th>RP {{ number_format($total_pengeluaran) }}</th>
+                                                  <th>= RP {{ number_format($jumlah_kas) }}</th>
                                              </tr>
-                                         </tfoot>
+                                        </tfoot>
                                    </table>
                               </div>
                               <!-- /.card-body -->

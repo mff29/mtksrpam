@@ -82,7 +82,8 @@ class KasController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['kas'] = Kas::findOrFail($id);
+        return view('kas.edit',$data);
     }
 
     /**
@@ -90,7 +91,25 @@ class KasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'tipe' => 'required',
+            'deskripsi' => 'required',
+            'nominal' => 'required|numeric',
+        ]);
+
+        $kas = Kas::findOrFail($id);
+        $data = $request->all();
+        if ($data['tipe'] == 'pendapatan') {
+            $data['nominal_pendapatan'] = $data['nominal'];
+            $data['nominal_pengeluaran'] = 0;
+        } else {
+            $data['nominal_pengeluaran'] = $data['nominal'];
+            $data['nominal_pendapatan'] = 0;
+        }
+
+        $kas->update($data);
+    
+        return redirect(route('kas.index'))->with('message', 'Data berhasil diperbarui');
     }
 
     /**
@@ -98,6 +117,7 @@ class KasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kas = Kas::findOrFail($id);
+        return $kas->delete();
     }
 }

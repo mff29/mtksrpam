@@ -1,13 +1,8 @@
 <div class="form-group">
      <label class="col-sm-2 control-label">Tipe</label>
      <div class="col-sm-4">
-         {{-- {!! Form::select('tipe',['Pendapatan'=>'Pendapatan','Pengeluaran'=>'Pengeluaran'], null, ['class'=>'form-control','Placeholder'=>'Select Tipe']) !!} --}}
-         <select name="tipe" id="tipe" class="form-control">
-            <option value="" disabled selected>Select Tipe....</option>
-            <option value="pendapatan">Pendapatan</option>
-            <option value="pengeluaran">Pengeluaran</option>
-        </select>
-        </div>
+         {!! Form::select('tipe',['Pendapatan'=>'Pendapatan','Pengeluaran'=>'Pengeluaran'], null, ['class'=>'form-control','Placeholder'=>'Select Tipe']) !!}
+    </div>
 </div>
 <div class="form-group">
     <label class="col-sm-2 control-label">Deskripsi</label>
