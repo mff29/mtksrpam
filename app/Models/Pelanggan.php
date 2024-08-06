@@ -16,6 +16,6 @@ class Pelanggan extends Model
 
     public function pemakaian()
     {
-        return $this->hasMany(Pemakaian::class);
+        return $this->hasMany(\App\Models\Pemakaian::class);
     }
 }
