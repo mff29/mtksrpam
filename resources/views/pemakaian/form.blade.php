@@ -20,6 +20,7 @@
      <label class="col-sm-2 control-label">Meter Akhir</label>
      <div class="col-sm-4">
          {!! Form::number('meter_akhir', null, ['class'=>'akhir form-control','Placeholder'=>'Meter Akhir', 'required']) !!}
+         <div id="meter_akhir_error" class="text-danger"></div>
      </div>
 </div>
 <div class="form-group">

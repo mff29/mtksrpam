@@ -26,7 +26,7 @@
     $(document).ready(function() {
         $('.select2').select2();
 
-        $('select[name="pelanggan_id"], input[name="bulan"]').on('change', function() {
+            function updateMeterAwal() {
                 var pelanggan_id = $('select[name="pelanggan_id"]').val();
                 var bulan = $('input[name="bulan"]').val();
 
@@ -45,6 +45,26 @@
                         }
                     });
                 }
+            }
+
+            function validateMeterAkhir() {
+                var meterAwal = parseFloat($('input[name="meter_awal"]').val()) || 0;
+                var meterAkhir = parseFloat($('input[name="meter_akhir"]').val()) || 0;
+
+                if (meterAkhir < meterAwal) {
+                    $('#meter_akhir_error').text('Tidak boleh lebih rendah dari Meter Awal.');
+                } else {
+                    $('#meter_akhir_error').text('');
+                }
+            }
+
+            $('select[name="pelanggan_id"], input[name="bulan"]').on('change', function() {
+                updateMeterAwal();
+                validateMeterAkhir(); // Check validation on change
+            });
+
+            $('input[name="meter_akhir"]').on('input', function() {
+                validateMeterAkhir();
             });
     });
 </script>
@@ -61,5 +81,5 @@
 </script>
 @endpush
 @push('css')
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+{{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> --}}
 @endpush

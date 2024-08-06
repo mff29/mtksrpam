@@ -64,7 +64,7 @@ class PemakaianController extends Controller
         $request->validate([
             'pelanggan_id' => 'required',
             'bulan' => 'required|date_format:Y-m',
-            'meter_akhir' => 'required',
+            'meter_akhir' => 'required|gte:meter_awal',
             'pakai' => 'required',
         ]);
 
@@ -72,12 +72,12 @@ class PemakaianController extends Controller
                             ->where('bulan', $request->bulan)
                             ->exists();
         if ($exists) {
-            return redirect()->back()->withErrors(['error' => 'Data untuk pelanggan dan bulan tersebut sudah ada.'])->withInput();
+            return redirect()->back()->withErrors(['error' => 'Data untuk Pelanggan dan Bulan tersebut sudah ada!'])->withInput();
         }
 
         $data = Pemakaian::create($request->all());
         $data->save();
-        return redirect(route('pemakaian.index'))->with('message','Data berhasil disimpan');
+        return redirect(route('pemakaian.index'))->with('message','Data berhasil disimpan!');
     }
 
     /**
@@ -105,14 +105,36 @@ class PemakaianController extends Controller
     {
         $request->validate([
             'pelanggan_id' => 'required',
-            'bulan' => 'required',
-            'meter_akhir' => 'required',
-            'pakai' => 'required',
+            'bulan' => 'required|date_format:Y-m',
+            'meter_awal' => 'required|numeric',
+            'meter_akhir' => 'required|numeric|gte:meter_awal',
+            'pakai' => 'nullable|numeric',
         ]);
 
-        $data = Pemakaian::findOrFail($id);
-        $data->update($request->all());
-        return redirect(route('pemakaian.index'))->with('message','Data berhasil disimpan');
+        $pemakaian = Pemakaian::findOrFail($id);
+
+        $exists = Pemakaian::where('pelanggan_id', $request->pelanggan_id)
+                            ->where('bulan', $request->bulan)
+                            ->where('id', '!=', $id)
+                            ->exists();
+
+        if ($exists) {
+            return redirect()->back()->withErrors(['error' => 'Data untuk Pelanggan dan Bulan tersebut sudah ada!'])->withInput();
+        }
+
+        $previousMonth = Carbon::createFromFormat('Y-m', $request->bulan)->subMonth()->format('Y-m');
+        $meterAwal = Pemakaian::where('pelanggan_id', $request->pelanggan_id)
+                                ->where('bulan', $previousMonth)
+                                ->orderBy('created_at', 'desc')
+                                ->value('meter_akhir');
+
+        if ($request->input('meter_akhir') < $meterAwal) {
+            return redirect()->back()->withErrors(['meter_akhir' => 'Tidak boleh lebih kecil dari Meter Awal.'])->withInput();
+        }
+
+        $pemakaian->update($request->all());
+    
+        return redirect(route('pemakaian.index'))->with('message', 'Data berhasil disimpan');
     }
 
     /**
