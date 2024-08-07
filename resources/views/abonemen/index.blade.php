@@ -70,7 +70,7 @@
                     { data: 'level', name: 'level' },
                     { data: 'harga', name: 'harga' },
                     { data: 'administrasi', name: 'administrasi' },
-                    { data: 'keterlambatan', name: 'keterlambatan' },
+                    { data: 'denda_keterlambatan', name: 'denda_keterlambatan' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                ]
           });

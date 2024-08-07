@@ -47,7 +47,7 @@ class AbonemenController extends Controller
             'level' => 'required',
             'harga' => 'required',
             'administrasi' => 'required',
-            'keterlambatan' => 'required',
+            'denda_keterlambatan' => 'required',
         ]);
 
         $data = Abonemen::create($request->all());
@@ -82,7 +82,7 @@ class AbonemenController extends Controller
             'level' => 'required',
             'harga' => 'required',
             'administrasi' => 'required',
-            'keterlambatan' => 'required',
+            'denda_keterlambatan' => 'required',
         ]);
 
         $data = Abonemen::findOrFail($id);

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('level');
             $table->integer('harga');
             $table->integer('administrasi');
-            $table->integer('keterlambatan');
+            $table->integer('denda_keterlambatan');
             $table->timestamps();
             $table->softDeletes();
         });

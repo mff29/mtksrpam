@@ -17,9 +17,9 @@
      </div>
 </div>
 <div class="form-group">
-     <label class="col-sm-2 control-label">Biaya Keterlambatan</label>
+     <label class="col-sm-2 control-label">Denda Keterlambatan</label>
      <div class="col-sm-4">
-         {!! Form::number('keterlambatan', null, ['class'=>'form-control','Placeholder'=>'Biaya Keterlambatan']) !!}
+         {!! Form::number('denda_keterlambatan', null, ['class'=>'form-control','Placeholder'=>'Denda Keterlambatan']) !!}
      </div>
 </div>
 <div class="form-group">
