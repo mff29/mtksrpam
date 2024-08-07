@@ -115,7 +115,7 @@ class TagihanController extends Controller
     {
         $request->validate([
             'pelanggan_id' => 'required',
-            'pemakaian_id' => 'required|exists:pemakaians,id|unique:tagihans,pemakaian_id,'.$id,
+            'pemakaian_id' => 'required|exists:pemakaian,id|unique:tagihan,pemakaian_id,'.$id,
             'abonemen_id' => 'required',
             'harga_per_meter' => 'required|numeric',
             'jumlah_pakai' => 'required|numeric',
