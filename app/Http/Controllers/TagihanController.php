@@ -166,11 +166,15 @@ class TagihanController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
-        $tagihan = Tagihan::find($id);
+        $request->validate([
+            'status' => 'required|in:PENDING,LUNAS',
+        ]);
+
+        $tagihan = Tagihan::findOrFail($id);
         $tagihan->status = $request->status;
         $tagihan->save();
 
-        return response()->json(['success' => true]);
+        return response()->json(['message' => 'Status updated successfully.']);
     }
 
     /**

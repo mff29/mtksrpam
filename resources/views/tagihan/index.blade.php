@@ -27,7 +27,7 @@
                                     </div>
                                     <hr>
                                     @include('alert')
-                                    <table class="table table-bordered" id="tagihan-table">
+                                    <table class="table table-bordered table-striped" id="tagihan-table">
                                         <thead>
                                             <tr>
                                                 <th width="10">No</th>
@@ -55,11 +55,42 @@
             </div>
         </section>
 </div>
+
+<!-- Modal Edit Status -->
+<div class="modal fade" id="editStatusModal" tabindex="-1" role="dialog" aria-labelledby="editStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editStatusModalLabel">Edit Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="edit-status-form" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" name="status" class="form-control">
+                            <option value="PENDING">PENDING</option>
+                            <option value="LUNAS">LUNAS</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 @push('scripts')
 <script src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-    <script>
+{{-- <script>
         $(document).ready(function() {
             var table = $('#tagihan-table').DataTable({
                 processing: true,
@@ -79,19 +110,129 @@
                     {
                         data: 'status',
                         name: 'status', render: function(data, type, row) {
-                              if (data == 'PENDING') {
-                              return '<span class="badge bg-warning">PENDING</span>';
-                              } else if (data === 'LUNAS') {
-                              return '<span class="badge bg-success">LUNAS</span>';
-                              } else {
-                              return '<span class="badge bg-danger">' + data + '</span>';
-                              }
-                         }
+                        if (data == 'PENDING') {
+                            return '<span class="badge bg-warning status-editable" data-id="' + row.id + '" data-status="PENDING">PENDING</span>';
+                        } else if (data === 'LUNAS') {
+                            return '<span class="badge bg-success status-editable" data-id="' + row.id + '" data-status="LUNAS">LUNAS</span>';
+                        } else {
+                            return '<span class="badge bg-danger">' + data + '</span>';
+                        }
+                    }
                     },
                     { data: 'action', name: 'action' },
                 ]
             });
+
+            // Menampilkan modal edit status saat status diklik
+        $('#tagihan-table').on('click', '.status-editable', function() {
+            var id = $(this).data('id');
+            var status = $(this).data('status');
+            
+            $('#status').val(status);
+            $('#edit-status-form').attr('action', '/tagihan/' + id); // Menambahkan ID pada action URL
+            $('#editStatusModal').modal('show');
         });
+
+        // Menangani pengiriman form edit status
+        $('#edit-status-form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('action'), // Menggunakan action dari form
+                type: 'PUT',
+                data: $(this).serialize(), // Mengirim data form
+                success: function(response) {
+                    $('#editStatusModal').modal('hide');
+                    $('#tagihan-table').DataTable().ajax.reload();
+                    Swal.fire({
+                        title: 'Sukses',
+                        text: response.message,
+                        icon: 'success'
+                    });
+                },
+                error: function(xhr) {
+                    // Tangani kesalahan jika terjadi
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Terjadi kesalahan saat menyimpan data.',
+                        icon: 'error'
+                    });
+                }
+            });
+        });
+
+        });
+</script> --}}
+
+<script>
+    $(document).ready(function() {
+        var table = $('#tagihan-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '/tagihan',
+            columns: [
+                {data: 'DT_RowIndex', orderable: false, searchable: false},
+                { data: 'pelanggan.nama', name: 'pelanggan.nama' },
+                { data: 'pemakaian', name: 'pemakaian' },
+                { data: 'abonemen.level', name: 'abonemen.level' },
+                { data: 'harga_per_meter', name: 'harga_per_meter' },
+                { data: 'jumlah_pakai', name: 'jumlah_pakai'},
+                { data: 'administrasi', name: 'administrasi' },
+                { data: 'denda_keterlambatan', name: 'denda_keterlambatan' },
+                { data: 'tagihan', name: 'tagihan' },
+                { data: 'jenis_bayar', name: 'jenis_bayar' },
+                {
+                    data: 'status',
+                    name: 'status', render: function(data, type, row) {
+                    if (data == 'PENDING') {
+                        return '<span class="badge bg-warning status-editable" data-id="' + row.id + '" data-status="PENDING">PENDING</span>';
+                    } else if (data === 'LUNAS') {
+                        return '<span class="badge bg-success status-editable" data-id="' + row.id + '" data-status="LUNAS">LUNAS</span>';
+                    } else {
+                        return '<span class="badge bg-danger">' + data + '</span>';
+                    }
+                }
+                },
+                { data: 'action', name: 'action' },
+            ]
+        });
+
+        // Menampilkan modal edit status saat status diklik
+        $('#tagihan-table').on('click', '.status-editable', function() {
+            var id = $(this).data('id');
+            var status = $(this).data('status');
+
+            $('#status').val(status);
+            $('#tagihan-id').val(id); // Menambahkan ID ke hidden input
+            $('#edit-status-form').attr('action', '/tagihan/' + id); // Menambahkan ID ke URL
+            $('#editStatusModal').modal('show');
+        });
+
+        // Menangani pengiriman form edit status
+        $('#edit-status-form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'PUT',
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('#editStatusModal').modal('hide');
+                    $('#tagihan-table').DataTable().ajax.reload();
+                    Swal.fire({
+                        title: 'Sukses',
+                        text: response.message,
+                        icon: 'success'
+                    });
+                },
+                error: function(xhr) {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Terjadi kesalahan saat menyimpan data.',
+                        icon: 'error'
+                    });
+                }
+            });
+        });
+    });
 </script>
 
 <script type="text/javascript">
