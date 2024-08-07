@@ -34,6 +34,20 @@ class TagihanController extends Controller
         return view('tagihan.index');
     }
 
+    public function getAbonemenDetails($id)
+    {
+        $abonemen = Abonemen::find($id);
+
+        if (!$abonemen) {
+            return response()->json(['error' => 'Abonemen not found'], 404);
+        }
+
+        return response()->json([
+            'harga' => $abonemen->harga,
+            'administrasi' => $abonemen->administrasi,
+            'denda_keterlambatan' => $abonemen->denda_keterlambatan
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */

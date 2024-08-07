@@ -62,7 +62,7 @@
                     $('#harga_per_meter').val(data.harga);
                     $('#administrasi').val(data.administrasi);
                     if ($('#keterlambatan').val() == 'Ya') {
-                        $('#denda_keterlambatan').val(data.keterlambatan).parent().parent().removeClass('d-none');
+                        $('#denda_keterlambatan').val(data.denda_keterlambatan).parent().parent().removeClass('d-none');
                     }
                     calculateTagihan();
                 }
@@ -77,7 +77,7 @@
                     url: '/getAbonemenDetails/' + abonemen_id,
                     type: 'GET',
                     success: function(data) {
-                        $('#denda_keterlambatan').val(data.keterlambatan).parent().parent().removeClass('d-none');
+                        $('#denda_keterlambatan').val(data.denda_keterlambatan).parent().parent().removeClass('d-none');
                         calculateTagihan();
                     }
                 });
