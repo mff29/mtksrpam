@@ -30,12 +30,13 @@
                                     <table class="table table-bordered table-striped" id="tagihan-table">
                                         <thead>
                                             <tr>
-                                                <th width="10">No</th>
+                                                {{-- <th width="10">No</th> --}}
+                                                <th>Kode</th>
                                                 <th>Pelanggan</th>
                                                 <th>Pemakaian</th>
                                                 <th>Abonemen</th>
                                                 <th>Harga</th>
-                                                <th>Air M3</th>
+                                                <th>Air</th>
                                                 <th>Administrasi</th>
                                                 <th>Denda</th>
                                                 <th>Total</th>
@@ -139,13 +140,14 @@
             serverSide: true,
             ajax: '/tagihan',
             columns: [
-                {data: 'DT_RowIndex', orderable: false, searchable: false},
+                // {data: 'DT_RowIndex', orderable: false, searchable: false},
+                { data: 'pelanggan.kode', name: 'pelanggan.kode' },
                 { data: 'pelanggan.nama', name: 'pelanggan.nama' },
                 { data: 'pemakaian', name: 'pemakaian' },
                 { data: 'abonemen.level', name: 'abonemen.level' },
                 { data: 'harga_per_meter', name: 'harga_per_meter' },
                 { data: 'jumlah_pakai', name: 'jumlah_pakai'},
-                { data: 'administrasi', name: 'administrasi' },
+                { data: 'administrasi', name: 'administrasi', orderable: false, searchable: false },
                 { data: 'denda_keterlambatan', name: 'denda_keterlambatan' },
                 { data: 'tagihan', name: 'tagihan' },
                 { data: 'jenis_bayar', name: 'jenis_bayar' },
@@ -161,7 +163,7 @@
                     }
                 }
                 },
-                { data: 'action', name: 'action' },
+                { data: 'action', name: 'action', orderable: false, searchable: false },
             ]
         });
     });

@@ -36,7 +36,7 @@
                                                 <th>Pemakaian</th>
                                                 <th>Abonemen</th>
                                                 <th>Harga</th>
-                                                <th>Air M3</th>
+                                                <th>Air</th>
                                                 <th>Administrasi</th>
                                                 <th>Telat</th>
                                                 <th>Denda</th>
@@ -148,7 +148,7 @@
                 { data: 'abonemen.level', name: 'abonemen.level' },
                 { data: 'harga_per_meter', name: 'harga_per_meter' },
                 { data: 'jumlah_pakai', name: 'jumlah_pakai'},
-                { data: 'administrasi', name: 'administrasi' },
+                { data: 'administrasi', name: 'administrasi', orderable: false, searchable: false },
                 { data: 'telat', name: 'telat' },
                 { data: 'denda_keterlambatan', name: 'denda_keterlambatan' },
                 { data: 'tagihan', name: 'tagihan' },
@@ -165,7 +165,7 @@
                     }
                 }
                 },
-                { data: 'action', name: 'action' },
+                { data: 'action', name: 'action', orderable: false, searchable: false },
             ]
         });
     });
