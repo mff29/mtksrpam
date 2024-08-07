@@ -20,7 +20,7 @@ class DashboardController extends Controller
         $data['pendapatan_air'] = Tagihan::where('status','lunas')->sum('tagihan');
         $data['total_uang_kas'] = $data['jumlah_kas'] + $data['pendapatan_air'];
 
-        $data['belum_lunas'] = Tagihan::where('status','belum lunas')->count('tagihan');
+        $data['belum_lunas'] = Tagihan::where('status','PENDING')->count('tagihan');
         
         return view('dashboard',$data);
     }

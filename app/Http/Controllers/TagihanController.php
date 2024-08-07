@@ -19,8 +19,9 @@ class TagihanController extends Controller
         if($request->ajax()){
             return DataTables::of(Tagihan::with('pelanggan','pemakaian','abonemen')->get())
             ->addColumn('action', function($row){
-                $btn = "<a href='/tagihan/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'><i class='fa fa-edit'></i></a>";
-                $btn .= '<button type="button" onclick="alert_delete(\'' . $row->id . '\')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
+                // $btn = "<a href='/tagihan/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'>bayar<i class='fa fa-edit'></i></a>";
+                $btn = "<a href='/tagihan/" . $row->id . "/edit' class='btn btn-info btn-sm ' style='margin-right:5px'>bayar</a>";
+                // $btn .= '<button type="button" onclick="alert_delete(\'' . $row->id . '\')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                 return $btn;
             })
             ->addColumn('pemakaian', function ($row) {

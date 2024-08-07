@@ -55,37 +55,6 @@
             </div>
         </section>
 </div>
-
-<!-- Modal Edit Status -->
-<div class="modal fade" id="editStatusModal" tabindex="-1" role="dialog" aria-labelledby="editStatusModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editStatusModalLabel">Edit Status</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form id="edit-status-form" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <select id="status" name="status" class="form-control">
-                            <option value="PENDING">PENDING</option>
-                            <option value="LUNAS">LUNAS</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 @endsection
 @push('scripts')
 <script src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
@@ -194,43 +163,6 @@
                 },
                 { data: 'action', name: 'action' },
             ]
-        });
-
-        // Menampilkan modal edit status saat status diklik
-        $('#tagihan-table').on('click', '.status-editable', function() {
-            var id = $(this).data('id');
-            var status = $(this).data('status');
-
-            $('#status').val(status);
-            $('#tagihan-id').val(id); // Menambahkan ID ke hidden input
-            $('#edit-status-form').attr('action', '/tagihan/' + id); // Menambahkan ID ke URL
-            $('#editStatusModal').modal('show');
-        });
-
-        // Menangani pengiriman form edit status
-        $('#edit-status-form').on('submit', function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'PUT',
-                data: $(this).serialize(),
-                success: function(response) {
-                    $('#editStatusModal').modal('hide');
-                    $('#tagihan-table').DataTable().ajax.reload();
-                    Swal.fire({
-                        title: 'Sukses',
-                        text: response.message,
-                        icon: 'success'
-                    });
-                },
-                error: function(xhr) {
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'Terjadi kesalahan saat menyimpan data.',
-                        icon: 'error'
-                    });
-                }
-            });
         });
     });
 </script>
