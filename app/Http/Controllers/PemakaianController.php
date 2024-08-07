@@ -9,6 +9,9 @@ use Yajra\DataTables\Facades\DataTables;
 use App\Exports\PemakaianExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
+use App\Models\Tagihan;
+use App\Models\Abonemen;
+use Illuminate\Support\Str;
 
 class PemakaianController extends Controller
 {
@@ -55,6 +58,8 @@ class PemakaianController extends Controller
         $data['pelanggan'] = Pelanggan::all()->mapWithKeys(function ($item) {
             return [$item['id'] => $item['kode'] . ' - ' . $item['nama']];
         });
+
+        $data['abonemens'] = Abonemen::all();
         return view('pemakaian.create',$data);
     }
 
@@ -70,6 +75,8 @@ class PemakaianController extends Controller
             'pakai' => 'required',
         ]);
 
+        $jumlah_pakai = $request->meter_akhir - $request->meter_awal;
+
         $exists = Pemakaian::where('pelanggan_id', $request->pelanggan_id)
                             ->where('bulan', $request->bulan)
                             ->exists();
@@ -77,8 +84,42 @@ class PemakaianController extends Controller
             return redirect()->back()->withErrors(['error' => 'Data untuk Pelanggan dan Bulan tersebut sudah ada!'])->withInput();
         }
 
-        $data = Pemakaian::create($request->all());
-        $data->save();
+        $pemakaian = Pemakaian::create([
+            // 'id' => Str::uuid(),
+            'pelanggan_id' => $request->pelanggan_id,
+            'bulan' => $request->bulan,
+            'meter_awal' => $request->meter_awal,
+            'meter_akhir' => $request->meter_akhir,
+            'pakai' => $jumlah_pakai,
+            'abonemen_id' => $request->abonemen_id,
+        ]);
+        // $data = Pemakaian::create($request->all());
+        // $pemakaian->save();
+
+        $abonemen = Abonemen::find($request->abonemen_id);
+
+        $harga_per_meter = $abonemen->harga;
+        $administrasi = $abonemen->administrasi;
+        $denda_keterlambatan = $abonemen->denda_keterlambatan;
+        $denda_keterlambatan = ($request->telat === 'YA') ? $abonemen->denda_keterlambatan : 0;
+        $tagihan_total = ($harga_per_meter * $jumlah_pakai) + $administrasi + $denda_keterlambatan;
+
+        // Buat tagihan baru
+        Tagihan::create([
+            'id' => Str::uuid(),
+            'pelanggan_id' => $pemakaian->pelanggan_id,
+            'pemakaian_id' => $pemakaian->id,
+            'abonemen_id' => $abonemen->id,
+            'harga_per_meter' => $harga_per_meter,
+            'jumlah_pakai' => $jumlah_pakai,
+            'administrasi' => $administrasi,
+            'telat' => 'Tidak',
+            'denda_keterlambatan' => $denda_keterlambatan,
+            'tagihan' => $tagihan_total,
+            'jenis_bayar' => 'Default', // Atur default jenis bayar
+            'status' => 'PENDING', // Atur default status
+        ]);
+
         return redirect(route('pemakaian.index'))->with('message','Data berhasil disimpan!');
     }
 
@@ -97,6 +138,8 @@ class PemakaianController extends Controller
     {
         $data['pelanggan'] = Pelanggan::pluck('nama','id');
         $data['pemakaian'] = Pemakaian::findOrFail($id);
+        $data['abonemens'] = Abonemen::all();
+
         return view('pemakaian.edit',$data);
     }
 
@@ -111,32 +154,32 @@ class PemakaianController extends Controller
             'meter_awal' => 'required|numeric',
             'meter_akhir' => 'required|numeric|gte:meter_awal',
             'pakai' => 'nullable|numeric',
+            'abonemen_id' => 'required'
         ]);
 
         $pemakaian = Pemakaian::findOrFail($id);
 
-        $exists = Pemakaian::where('pelanggan_id', $request->pelanggan_id)
-                            ->where('bulan', $request->bulan)
-                            ->where('id', '!=', $id)
-                            ->exists();
-
-        if ($exists) {
+        if (Pemakaian::where('pelanggan_id', $request->pelanggan_id)
+            ->where('bulan', $request->bulan)
+            ->where('id', '!=', $id)
+            ->exists()) {
             return redirect()->back()->withErrors(['error' => 'Data untuk Pelanggan dan Bulan tersebut sudah ada!'])->withInput();
         }
-
+    
         $previousMonth = Carbon::createFromFormat('Y-m', $request->bulan)->subMonth()->format('Y-m');
         $meterAwal = Pemakaian::where('pelanggan_id', $request->pelanggan_id)
                                 ->where('bulan', $previousMonth)
                                 ->orderBy('created_at', 'desc')
                                 ->value('meter_akhir');
-
+    
         if ($request->input('meter_akhir') < $meterAwal) {
             return redirect()->back()->withErrors(['meter_akhir' => 'Tidak boleh lebih kecil dari Meter Awal.'])->withInput();
         }
-
-        $pemakaian->update($request->all());
     
+        $pemakaian->update($request->all());
+        
         return redirect(route('pemakaian.index'))->with('message', 'Data berhasil disimpan');
+    
     }
 
     /**

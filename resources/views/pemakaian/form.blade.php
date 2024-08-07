@@ -30,6 +30,16 @@
      </div>
 </div>
 <div class="form-group">
+    <label for="abonemen_id" class="col-sm-2 control-label">Abonemen</label>
+    <div class="col-sm-4">
+        <select class="form-control" id="abonemen_id" name="abonemen_id">
+            @foreach($abonemens as $abonemen)
+                <option value="{{ $abonemen->id }}">{{ $abonemen->level }}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+<div class="form-group">
      <div class="col-sm-offset-2 col-sm-10">
          <button type="submit" class="btn btn-success btn btn-sm"><i class="fa fa-save" aria-hidden="true"></i> Simpan</button>
          <a href="/pemakaian" class="btn btn-danger btn btn-sm"><i class="fa fa-share" aria-hidden="true"></i> Kembali</a>

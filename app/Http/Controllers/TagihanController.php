@@ -24,7 +24,7 @@ class TagihanController extends Controller
                 return $btn;
             })
             ->addColumn('pemakaian', function ($row) {
-                return $row->pemakaian->bulan . ' ' . $row->pemakaian->tahun;
+                return $row->pemakaian->bulan ?? 'N/A';
             })
             ->rawColumns(['action','status','code'])
             ->addIndexColumn()
@@ -40,8 +40,8 @@ class TagihanController extends Controller
     public function create()
     {
         $data['pelanggans'] = Pelanggan::all();
-        $data['abonemens'] = Abonemen::all();
         $data['pemakaians'] = Pemakaian::all();
+        $data['abonemens'] = Abonemen::all();
         return view('tagihan.create', $data);
 
         // return view('tagihan.buat', $data);
@@ -116,6 +116,7 @@ class TagihanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $tagihan = Tagihan::findOrFail($id);
+        return $tagihan->delete();
     }
 }
