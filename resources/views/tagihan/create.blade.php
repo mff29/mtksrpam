@@ -22,7 +22,7 @@
      </div>
 @endsection
 @push('scripts')
-{{-- <script>
+<script>
     $(document).ready(function() {
         $('.select2').select2();
 
@@ -95,79 +95,6 @@
 
             var tagihan = (harga_per_meter * jumlah_pakai) + administrasi + denda_keterlambatan;
             $('#tagihan').val(tagihan);
-        }
-    });
-</script> --}}
-
-<script>
-    $(document).ready(function() {
-        $('.select2').select2();
-
-        $('#pelanggan_id').change(function() {
-            var pelanggan_id = $(this).val();
-            $.ajax({
-                url: '/getPemakaianByPelanggan/' + pelanggan_id,
-                type: 'GET',
-                success: function(data) {
-                    $('#pemakaian_id').empty();
-                    $('#pemakaian_id').append('<option value="">Select Pemakaian</option>');
-                    $.each(data, function(key, value) {
-                        $('#pemakaian_id').append('<option value="' + key + '">' + value + '</option>');
-                    });
-                }
-            });
-        });
-
-        $('#pemakaian_id').change(function() {
-            var pemakaian_id = $(this).val();
-            $.ajax({
-                url: '/getJumlahPakai/' + pemakaian_id,
-                type: 'GET',
-                success: function(data) {
-                    $('#jumlah_pakai').val(data.jumlah_pakai);
-                }
-            });
-        });
-
-        $('#abonemen_id').change(function() {
-            var abonemen_id = $(this).val();
-            $.ajax({
-                url: '/getAbonemen/' + abonemen_id,
-                type: 'GET',
-                success: function(data) {
-                    $('#harga_per_meter').val(data.harga);
-                    $('#administrasi').val(data.administrasi);
-                    $('#denda_keterlambatan').val(data.denda_keterlambatan);
-                }
-            });
-        });
-
-        $('#keterlambatan').change(function() {
-            if ($(this).val() === 'TELAT') {
-                $('#denda-group').removeClass('d-none');
-                $('#denda_keterlambatan').val($('#denda_keterlambatan').val()); // Update denda if needed
-            } else {
-                $('#denda-group').addClass('d-none');
-                $('#denda_keterlambatan').val('');
-            }
-        });
-
-        $('#harga_per_meter, #jumlah_pakai, #administrasi').on('input', function() {
-            calculateTagihan();
-        });
-
-        $('#denda_keterlambatan').on('input', function() {
-            calculateTagihan();
-        });
-
-        function calculateTagihan() {
-            var harga_per_meter = parseFloat($('#harga_per_meter').val()) || 0;
-            var jumlah_pakai = parseFloat($('#jumlah_pakai').val()) || 0;
-            var administrasi = parseFloat($('#administrasi').val()) || 0;
-            var denda_keterlambatan = parseFloat($('#denda_keterlambatan').val()) || 0;
-
-            var tagihan = (harga_per_meter * jumlah_pakai) + denda_keterlambatan + administrasi;
-            $('#tagihan').val(tagihan.toFixed(2));
         }
     });
 </script>

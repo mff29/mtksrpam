@@ -82,7 +82,7 @@
             </div>
         </div> --}}
 
-        @csrf
+
 <div class="form-group">
     {!! Form::label('pelanggan_id', 'Pelanggan') !!}
     {!! Form::select('pelanggan_id', $pelanggans->pluck('nama', 'id'), old('pelanggan_id', $tagihan->pelanggan_id ?? ''), ['class' => 'form-control' . ($errors->has('pelanggan_id') ? ' is-invalid' : '')]) !!}
