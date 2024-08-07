@@ -4,11 +4,11 @@
                 {!! Form::select('pelanggan_id', $pelanggans->pluck('nama', 'id'), null, ['class' => 'form-control select2', 'placeholder' => 'Select Pelanggan', 'id' => 'pelanggan_id']) !!}
             </div>
         </div>
-        
+
         <div class="form-group">
             <label class="col-sm-2 control-label">Bulan Pemakaian</label>
             <div class="col-sm-4">
-                {!! Form::select('pemakaian_id', [], null, ['class' => 'form-control', 'placeholder' => 'Select Pemakaian', 'id' => 'pemakaian_id']) !!}
+                {!! Form::select('pemakaian_id', $pemakaians, null, ['class' => 'form-control', 'placeholder' => 'Select Pemakaian', 'id' => 'pemakaian_id']) !!}
             </div>
         </div>
         
