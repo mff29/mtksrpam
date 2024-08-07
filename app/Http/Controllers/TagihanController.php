@@ -83,6 +83,12 @@ class TagihanController extends Controller
         }
 
         Tagihan::create($request->all());
+
+        $pemakaian = Pemakaian::find($request->pemakaian_id);
+        if ($pemakaian) {
+            $pemakaian->status = $request->status; // Mengatur status pemakaian dengan nilai status tagihan
+            $pemakaian->save();
+        }
         
         return redirect()->route('tagihan.index')->with('success', 'Tagihan berhasil ditambahkan.');
     }
@@ -147,6 +153,12 @@ class TagihanController extends Controller
             'jenis_bayar' => $request->jenis_bayar,
             'status' => $request->status,
         ]);
+
+        $pemakaian = Pemakaian::find($request->pemakaian_id);
+        if ($pemakaian) {
+            $pemakaian->status = $request->status; // Mengatur status pemakaian dengan nilai status tagihan
+            $pemakaian->update();
+        }
 
         return redirect()->route('tagihan.index')->with('success', 'Tagihan berhasil diperbarui.');
     
