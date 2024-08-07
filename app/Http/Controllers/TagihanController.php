@@ -99,17 +99,52 @@ class TagihanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'pelanggan_id' => 'required',
+            'pemakaian_id' => 'required|exists:pemakaians,id|unique:tagihans,pemakaian_id,'.$id,
+            'abonemen_id' => 'required',
+            'harga_per_meter' => 'required|numeric',
+            'jumlah_pakai' => 'required|numeric',
+            'administrasi' => 'required|numeric',
+            'denda_keterlambatan' => 'required|numeric',
+            'tagihan' => 'required|numeric',
+            'jenis_bayar' => 'required',
+            'status' => 'required',
+        ]);
+
+        $tagihan = Tagihan::findOrFail($id);
+
+        if (Tagihan::where('pemakaian_id', $request->pemakaian_id)->where('id', '!=', $id)->exists()) {
+            return redirect()->back()->withErrors([
+                'pemakaian_id' => 'Tagihan untuk pemakaian ini sudah ada!'
+            ])->withInput();
+        }
+
+        $tagihan->update([
+            'pelanggan_id' => $request->pelanggan_id,
+            'pemakaian_id' => $request->pemakaian_id,
+            'abonemen_id' => $request->abonemen_id,
+            'harga_per_meter' => $request->harga_per_meter,
+            'jumlah_pakai' => $request->jumlah_pakai,
+            'administrasi' => $request->administrasi,
+            'denda_keterlambatan' => $request->denda_keterlambatan,
+            'tagihan' => $request->tagihan,
+            'jenis_bayar' => $request->jenis_bayar,
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('tagihan.index')->with('success', 'Tagihan berhasil diperbarui.');
+    
     }
 
     public function updateStatus(Request $request, $id)
-{
-    $tagihan = Tagihan::find($id);
-    $tagihan->status = $request->status;
-    $tagihan->save();
+    {
+        $tagihan = Tagihan::find($id);
+        $tagihan->status = $request->status;
+        $tagihan->save();
 
-    return response()->json(['success' => true]);
-}
+        return response()->json(['success' => true]);
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -117,6 +152,8 @@ class TagihanController extends Controller
     public function destroy(string $id)
     {
         $tagihan = Tagihan::findOrFail($id);
-        return $tagihan->delete();
+        $tagihan->delete();
+        
+        return response()->json(['success' => 'Tagihan berhasil dihapus']);
     }
 }
