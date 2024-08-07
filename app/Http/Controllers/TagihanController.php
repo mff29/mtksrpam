@@ -141,6 +141,7 @@ class TagihanController extends Controller
             'harga_per_meter' => $request->harga_per_meter,
             'jumlah_pakai' => $request->jumlah_pakai,
             'administrasi' => $request->administrasi,
+            'telat' => $request->telat,
             'denda_keterlambatan' => $request->denda_keterlambatan,
             'tagihan' => $request->tagihan,
             'jenis_bayar' => $request->jenis_bayar,
