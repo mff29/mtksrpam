@@ -61,7 +61,7 @@
                 success: function(data) {
                     $('#harga_per_meter').val(data.harga);
                     $('#administrasi').val(data.administrasi);
-                    if ($('#keterlambatan').val() == 'TELAT') {
+                    if ($('#keterlambatan').val() == 'Ya') {
                         $('#denda_keterlambatan').val(data.keterlambatan).parent().parent().removeClass('d-none');
                     }
                     calculateTagihan();
@@ -71,7 +71,7 @@
 
         $('#keterlambatan').change(function() {
             var keterlambatan = $(this).val();
-            if (keterlambatan == 'TELAT') {
+            if (keterlambatan == 'Ya') {
                 var abonemen_id = $('#abonemen_id').val();
                 $.ajax({
                     url: '/getAbonemenDetails/' + abonemen_id,
@@ -98,5 +98,4 @@
         }
     });
 </script>
-
 @endpush

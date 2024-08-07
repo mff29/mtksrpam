@@ -134,7 +134,7 @@
 <div class="form-group">
     <label for="keterlambatan" class="col-sm-2 control-label">Keterlambatan</label>
     <div class="col-sm-4">
-        {!! Form::select('telat', ['TIDAK' => 'TIDAK', 'TELAT' => 'TELAT'], null, ['class' => 'form-control', 'id' => 'keterlambatan','placeholder'=>'Select keterlambatan']) !!}
+        {!! Form::select('telat', ['TIDAK' => 'TIDAK', 'Ya' => 'Ya'], null, ['class' => 'form-control', 'id' => 'keterlambatan','placeholder'=>'Select keterlambatan']) !!}
     </div>
 </div>
 
@@ -177,4 +177,9 @@
     @enderror
 </div>
 
-<button type="submit" class="btn btn-primary">Simpan</button>
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-success btn btn-sm"><i class="fa fa-save" aria-hidden="true"></i> Simpan</button>
+        <a href="/tagihan" class="btn btn-danger btn btn-sm"><i class="fa fa-share" aria-hidden="true"></i> Kembali</a>
+    </div>
+</div>
