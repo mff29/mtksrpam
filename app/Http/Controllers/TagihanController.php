@@ -17,7 +17,7 @@ class TagihanController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            return DataTables::of(Tagihan::with('pelanggan','pemakaian','abonemen')->get())
+            return DataTables::of(Tagihan::with('pelanggan','pemakaian','abonemen')->where('status','PENDING')->get())
             ->addColumn('action', function($row){
                 // $btn = "<a href='/tagihan/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'>bayar<i class='fa fa-edit'></i></a>";
                 $btn = "<a href='/tagihan/" . $row->id . "/edit' class='btn btn-info btn-sm ' style='margin-right:5px'>bayar</a>";

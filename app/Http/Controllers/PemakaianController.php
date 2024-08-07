@@ -81,7 +81,7 @@ class PemakaianController extends Controller
                             ->where('bulan', $request->bulan)
                             ->exists();
         if ($exists) {
-            return redirect()->back()->withErrors(['error' => 'Data untuk Pelanggan dan Bulan tersebut sudah ada!'])->withInput();
+            return redirect()->back()->withErrors(['error' => 'Data Pemakaian untuk Pelanggan dan Bulan tersebut sudah terinput!'])->withInput();
         }
 
         $pemakaian = Pemakaian::create([

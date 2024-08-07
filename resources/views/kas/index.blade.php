@@ -58,17 +58,46 @@
                                              <tr>
                                                   <th width="10">No</th>
                                                   <th>Tipe</th>
+                                                  <th>Tanggal</th>
                                                   <th>Deskripsi</th>
                                                   <th>Nominal</th>
-                                                  <th>#</th>
+                                                  <th width="90">#</th>
                                              </tr>
                                         </thead>
-                                        <tfoot class="bg-lime">
+                                   </table>
+
+                                   <table class="table table-bordered table-striped" id="kas-table">
+                                        <thead class="bg-lime">
+                                             <tr>
+                                                  <th width="10">No</th>
+                                                  <th>Bulan</th>
+                                                  <th>Pendapatan</th>
+                                                  <th>Pengeluaran</th>
+                                                  <th>Total</th>
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                             <tr>
+                                                  <td>1</td>
+                                                  <td>Agustus</td>
+                                                  <td>{{ $magustus }}</td>
+                                                  <td>{{ $kagustus }}</td>
+                                                  <td>{{ $tagustus }}</td>
+                                             </tr>
+                                             <tr>
+                                                  <td>2</td>
+                                                  <td>juli</td>
+                                                  <td>{{ $mjuli }}</td>
+                                                  <td>{{ $kjuli }}</td>
+                                                  <td>{{ $tjuli }}</td>
+                                             </tr>
+                                        </tbody>
+                                        <tfoot class="bg-green">
                                              <tr>
                                                   <th colspan="2">Total</th>
-                                                  <th>+ RP {{ number_format($pendapatan_kas,0,',','.') }}</th>
-                                                  <th>- RP {{ number_format($pengeluaran_kas,0,',','.') }}</th>
-                                                  <th>= RP {{ number_format($jumlah_kas,0,',','.') }}</th>
+                                                  <th>RP {{ number_format($pendapatan_kas,0,',','.') }}</th>
+                                                  <th>RP {{ number_format($pengeluaran_kas,0,',','.') }}</th>
+                                                  <th colspan="2">= RP {{ number_format($jumlah_kas,0,',','.') }}</th>
                                              </tr>
                                         </tfoot>
                                    </table>
@@ -100,6 +129,7 @@
                columns: [
                     {data: 'DT_RowIndex', orderable: false, searchable: false},
                     { data: 'tipe', name: 'tipe' },
+                    { data: 'tgl', name: 'tgl' },
                     { data: 'deskripsi', name: 'deskripsi' },
                     { data: 'nominal', name: 'nominal' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }

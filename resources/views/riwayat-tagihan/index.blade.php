@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Tagihan')
+@section('title','Riwayat Tagihan')
 @section('content')
 <div class="content-wrapper">
         <section class="content">
@@ -8,7 +8,7 @@
                         <div class="col-12">
                             <div class="card mt-3">
                                 <div class="card-header">
-                                    <h3 class="card-title">DATA TAGIHAN</h3>
+                                    <h3 class="card-title">RIWAYAT TAGIHAN</h3>
                                     <div class="card-tools">
                                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                                 <i class="fas fa-minus"></i>
@@ -17,9 +17,9 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-3">
-                                            <a href="{{route('tagihan.create')}}" class="btn btn-info btn-social">
+                                            {{-- <a href="{{route('tagihan.create')}}" class="btn btn-info btn-social">
                                                 <i class="fa fa-plus" aria-hidden="true"></i> Tambah Data
-                                            </a>
+                                            </a> --}}
                                             <div>
                                                 <a href="/tagihan/export-excel" class="btn btn-success mr-1"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
                                                 <a href="/tagihan/export-pdf" class="btn btn-danger"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
@@ -27,27 +27,29 @@
                                     </div>
                                     <hr>
                                     @include('alert')
-                                    <table class="table table-bordered table-striped" id="tagihan-table">
+                                    <table class="table table-bordered table-striped" id="riwayat-tagihan-table">
                                         <thead>
                                             <tr>
-                                                <th width="10">No</th>
+                                                {{-- <th width="10">No</th> --}}
                                                 <th>Pelanggan</th>
+                                                <th>Kode</th>
                                                 <th>Pemakaian</th>
                                                 <th>Abonemen</th>
                                                 <th>Harga</th>
                                                 <th>Air M3</th>
                                                 <th>Administrasi</th>
+                                                <th>Telat</th>
                                                 <th>Denda</th>
                                                 <th>Total</th>
                                                 <th>Payment</th>
                                                 <th>Status</th>
-                                                <th width="90">#</th>
+                                                <th>Invoice</th>
                                             </tr>
                                         </thead>
                                     </table>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{ route('riwayat-tagihan.index') }}">Lihat Riwayat Tagihan</a>
+                                    Footer
                                 </div>
                             </div>
                         </div>
@@ -134,18 +136,20 @@
 
 <script>
     $(document).ready(function() {
-        var table = $('#tagihan-table').DataTable({
+        var table = $('#riwayat-tagihan-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '/tagihan',
+            ajax: '/riwayat-tagihan',
             columns: [
-                {data: 'DT_RowIndex', orderable: false, searchable: false},
+                // {data: 'DT_RowIndex', orderable: false, searchable: false},
                 { data: 'pelanggan.nama', name: 'pelanggan.nama' },
+                { data: 'pelanggan.kode', name: 'pelanggan.kode' },
                 { data: 'pemakaian', name: 'pemakaian' },
                 { data: 'abonemen.level', name: 'abonemen.level' },
                 { data: 'harga_per_meter', name: 'harga_per_meter' },
                 { data: 'jumlah_pakai', name: 'jumlah_pakai'},
                 { data: 'administrasi', name: 'administrasi' },
+                { data: 'telat', name: 'telat' },
                 { data: 'denda_keterlambatan', name: 'denda_keterlambatan' },
                 { data: 'tagihan', name: 'tagihan' },
                 { data: 'jenis_bayar', name: 'jenis_bayar' },
@@ -184,7 +188,7 @@
                         $.ajax({
                             type: "DELETE",
                             data:{ _token: '{{ csrf_token() }}' },
-                            url: "/tagihan/" + dataId,
+                            url: "/riwayat-tagihan/" + dataId,
                             success: function(response) {
                             Swal.fire({
                                 title: 'Sukses',

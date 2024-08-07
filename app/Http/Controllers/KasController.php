@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Tagihan;
+use Carbon\Carbon;
 use App\Models\Kas;
+use App\Models\Tagihan;
+use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
 class KasController extends Controller
@@ -20,6 +21,29 @@ class KasController extends Controller
         $data['pendapatan_air'] = Tagihan::where('status','lunas')->sum('tagihan');
         $data['total_uang_kas'] = $data['jumlah_kas'] + $data['pendapatan_air'];
         $data['kas'] = Kas::all();
+
+        $tahun = Carbon::now()->year;
+        $agustus = 8;
+        $data['magustus'] = Kas::where('tipe', 'PENDAPATAN')
+            ->whereYear('tgl', $tahun)
+            ->whereMonth('tgl', $agustus)
+            ->sum('nominal');
+        $data['kagustus'] = Kas::where('tipe', 'PENGELUARAN')
+            ->whereYear('tgl', $tahun)
+            ->whereMonth('tgl', $agustus)
+            ->sum('nominal');
+        $data['tagustus'] = $data['magustus'] - $data['kagustus'];
+
+        $juli = 7;
+        $data['mjuli'] = Kas::where('tipe', 'PENDAPATAN')
+            ->whereYear('tgl', $tahun)
+            ->whereMonth('tgl', $juli)
+            ->sum('nominal');
+        $data['kjuli'] = Kas::where('tipe', 'PENGELUARAN')
+            ->whereYear('tgl', $tahun)
+            ->whereMonth('tgl', $juli)
+            ->sum('nominal');
+        $data['tjuli'] = $data['mjuli'] - $data['kjuli'];
 
         if($request->ajax()){
             return DataTables::of($data['kas'])

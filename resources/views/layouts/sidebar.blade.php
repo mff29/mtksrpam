@@ -44,6 +44,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{ url('riwayat-tagihan') }}" class="nav-link">
+                <i class="bi bi-receipt nav-icon"></i>
+                <p>Riwayat Tagihan</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{ url('tagihan') }}" class="nav-link">
                 <i class="bi bi-receipt-cutoff nav-icon"></i>
                 <p>Tagihan</p>
