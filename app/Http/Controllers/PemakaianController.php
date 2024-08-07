@@ -116,8 +116,8 @@ class PemakaianController extends Controller
             'telat' => 'Tidak',
             'denda_keterlambatan' => $denda_keterlambatan,
             'tagihan' => $tagihan_total,
-            'jenis_bayar' => 'Default', // Atur default jenis bayar
-            'status' => 'PENDING', // Atur default status
+            'jenis_bayar' => 'Default',
+            'status' => 'PENDING',
         ]);
 
         return redirect(route('pemakaian.index'))->with('message','Data berhasil disimpan!');
@@ -165,19 +165,47 @@ class PemakaianController extends Controller
             ->exists()) {
             return redirect()->back()->withErrors(['error' => 'Data untuk Pelanggan dan Bulan tersebut sudah ada!'])->withInput();
         }
-    
+
         $previousMonth = Carbon::createFromFormat('Y-m', $request->bulan)->subMonth()->format('Y-m');
         $meterAwal = Pemakaian::where('pelanggan_id', $request->pelanggan_id)
-                                ->where('bulan', $previousMonth)
-                                ->orderBy('created_at', 'desc')
-                                ->value('meter_akhir');
-    
+            ->where('bulan', $previousMonth)
+            ->orderBy('created_at', 'desc')
+            ->value('meter_akhir');
+
         if ($request->input('meter_akhir') < $meterAwal) {
             return redirect()->back()->withErrors(['meter_akhir' => 'Tidak boleh lebih kecil dari Meter Awal.'])->withInput();
         }
-    
-        $pemakaian->update($request->all());
-        
+
+        $jumlah_pakai = $request->meter_akhir - $request->meter_awal;
+
+        $pemakaian->update([
+            'pelanggan_id' => $request->pelanggan_id,
+            'bulan' => $request->bulan,
+            'meter_awal' => $request->meter_awal,
+            'meter_akhir' => $request->meter_akhir,
+            'pakai' => $jumlah_pakai,
+            'abonemen_id' => $request->abonemen_id,
+        ]);
+
+        $abonemen = Abonemen::find($request->abonemen_id);
+
+        $harga_per_meter = $abonemen->harga;
+        $administrasi = $abonemen->administrasi;
+        $denda_keterlambatan = ($request->telat === 'YA') ? $abonemen->denda_keterlambatan : 0;
+        $tagihan_total = ($harga_per_meter * $jumlah_pakai) + $administrasi + $denda_keterlambatan;
+
+        // Update tagihan yang terkait
+        $tagihan = Tagihan::where('pemakaian_id', $id)->first();
+        $tagihan->update([
+            'pelanggan_id' => $pemakaian->pelanggan_id,
+            'abonemen_id' => $abonemen->id,
+            'harga_per_meter' => $harga_per_meter,
+            'jumlah_pakai' => $jumlah_pakai,
+            'administrasi' => $administrasi,
+            'denda_keterlambatan' => $denda_keterlambatan,
+            'tagihan' => $tagihan_total,
+        ]);
+
         return redirect(route('pemakaian.index'))->with('message', 'Data berhasil disimpan');
     
     }
@@ -188,7 +216,10 @@ class PemakaianController extends Controller
     public function destroy(string $id)
     {
         $pemakaian = Pemakaian::findOrFail($id);
-        return $pemakaian->delete();
+        Tagihan::where('pemakaian_id', $id)->delete(); // Hapus tagihan yang terkait
+        $pemakaian->delete();
+
+        return response()->json(['success' => 'Data berhasil dihapus']);
     }
 
     public function export_excel(){
