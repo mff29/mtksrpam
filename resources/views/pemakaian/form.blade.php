@@ -7,7 +7,7 @@
 <div class="form-group">
      <label class="col-sm-2 control-label">Month</label>
      <div class="col-sm-4">
-        {!! Form::month('bulan', \Carbon\Carbon::now()->format('Y-m'), ['class' => 'form-control']) !!}
+        {!! Form::month('bulan', isset($pemakaian->bulan) ? \Carbon\Carbon::parse($pemakaian->bulan)->format('Y-m') : \Carbon\Carbon::now()->format('Y-m'), ['class' => 'form-control']) !!}
     </div>
 </div>
 <div class="form-group">
