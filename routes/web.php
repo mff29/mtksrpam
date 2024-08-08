@@ -53,6 +53,8 @@ Route::get('/getAbonemenDetails/{abonemen_id}', function($abonemen_id) {
 
 Route::put('/tagihan/{id}', [App\Http\Controllers\TagihanController::class, 'updateStatus']);
 Route::get('/tagihan/{id}/pembayaran', [App\Http\Controllers\TagihanController::class, 'pembayaran']);
+
+Route::get('/riwayat-tagihan/export-excel', [App\Http\Controllers\RiwayatTagihanController::class, 'export_excel']);
 Route::resource('/riwayat-tagihan', 'App\Http\Controllers\RiwayatTagihanController');
 
 Route::resource('/kas', 'App\Http\Controllers\KasController');

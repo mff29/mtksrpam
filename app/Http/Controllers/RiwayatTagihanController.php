@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Tagihan;
-use App\Models\Pelanggan;
 use App\Models\Abonemen;
+use App\Models\Pelanggan;
 use App\Models\Pemakaian;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\RiwayatTagihanExport;
 use Yajra\DataTables\Facades\DataTables;
 
 class RiwayatTagihanController extends Controller
@@ -79,5 +81,10 @@ class RiwayatTagihanController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function export_excel(){
+        $now = date("Y-m-d H:i:s");
+        return Excel::download(new RiwayatTagihanExport, 'Riwayat Tagihan '. $now .'.xlsx');
     }
 }

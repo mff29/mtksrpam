@@ -8,15 +8,15 @@
          <th>Meter Akhir</th>
          <th>Jumlah Pakai</th>
      </tr>
-     @foreach($pemakaian as $p)
+     @foreach($tagihan as $t)
          <tr>
              <td>{{$loop->iteration }}</td>
-             <td>{{ $p->pelanggan->nama}}</td>
-             <td>{{ $p->bulan}}</td>
-             <td>{{ $p->tahun}}</td>
-             <td>{{ $p->meter_awal}}</td>
-             <td>{{ $p->meter_akhir}}</td>
-             <td>{{ $p->pakai}}</td>
+             <td>{{ $t->pelanggan->nama}}</td>
+             <td>{{ $t->bulan}}</td>
+             <td>{{ $t->tahun}}</td>
+             <td>{{ $t->meter_awal}}</td>
+             <td>{{ $t->meter_akhir}}</td>
+             <td>{{ $t->pakai}}</td>
          </tr>
      @endforeach
  </table>

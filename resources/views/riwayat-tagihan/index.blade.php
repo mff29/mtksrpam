@@ -21,8 +21,8 @@
                                                 <i class="fa fa-plus" aria-hidden="true"></i> Tambah Data
                                             </a> --}}
                                             <div>
-                                                <a href="/tagihan/export-excel" class="btn btn-success mr-1"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
-                                                <a href="/tagihan/export-pdf" class="btn btn-danger"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
+                                                <a href="/riwayat-tagihan/export-excel" class="btn btn-success mr-1"><i class="fa fa-file-excel" aria-hidden="true"></i></a>
+                                                <a href="/riwayat-tagihan/export-pdf" class="btn btn-danger"><i class="fa fa-file-pdf" aria-hidden="true"></i></a>
                                             </div>
                                     </div>
                                     <hr>
