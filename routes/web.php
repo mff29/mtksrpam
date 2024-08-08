@@ -31,7 +31,8 @@ Route::get('/pemakaian/export-excel', 'App\Http\Controllers\PemakaianController@
 Route::resource('/pemakaian', 'App\Http\Controllers\PemakaianController');
 Route::post('/get-meter-awal', [App\Http\Controllers\PemakaianController::class, 'getMeterAwal'])->name('getMeterAwal');
 
-Route::resource('/tagihan', 'App\Http\Controllers\TagihanController');
+Route::get('/tagihan/export-excel', [App\Http\Controllers\TagihanController::class, 'export_excel']);
+Route::resource('/tagihan', App\Http\Controllers\TagihanController::class);
 Route::get('/getAbonemenDetails/{id}', [App\Http\Controllers\TagihanController::class, 'getAbonemenDetails']);
 
 Route::get('/getPemakaianByPelanggan/{pelanggan_id}', function($pelanggan_id) {

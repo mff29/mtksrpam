@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Tagihan;
-use App\Models\Pelanggan;
 use App\Models\Abonemen;
+use App\Models\Pelanggan;
 use App\Models\Pemakaian;
+use Illuminate\Http\Request;
+use App\Exports\TagihanExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class TagihanController extends Controller
@@ -198,5 +200,10 @@ class TagihanController extends Controller
         $data['tagihan'] = Tagihan::findOrFail($id);
         
         return view('tagihan.pembayaran', $data);
+    }
+
+    public function export_excel(){
+        $now = date("Y-m-d H:i:s");
+        return Excel::download(new TagihanExport, 'Tagihan '. $now .'.xlsx');
     }
 }
