@@ -30,19 +30,19 @@
                                     <table class="table table-bordered table-striped" id="tagihan-table">
                                         <thead>
                                             <tr>
-                                                {{-- <th width="10">No</th> --}}
+                                                <th width="10">No</th>
+                                                <th>Nama Pelanggan</th>
                                                 <th>Kode</th>
-                                                <th>Pelanggan</th>
                                                 <th>Pemakaian</th>
                                                 <th>Abonemen</th>
                                                 <th>Harga</th>
                                                 <th>Air</th>
-                                                <th>Administrasi</th>
+                                                <th width="80">Administrasi</th>
                                                 <th>Denda</th>
                                                 <th>Total</th>
-                                                <th>Payment</th>
-                                                <th>Status</th>
-                                                <th width="90">#</th>
+                                                {{-- <th>Payment</th> --}}
+                                                <th width="80">Status</th>
+                                                <th width="75">Action</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -140,9 +140,9 @@
             serverSide: true,
             ajax: '/tagihan',
             columns: [
-                // {data: 'DT_RowIndex', orderable: false, searchable: false},
-                { data: 'pelanggan.kode', name: 'pelanggan.kode' },
+                {data: 'DT_RowIndex', orderable: false, searchable: false},
                 { data: 'pelanggan.nama', name: 'pelanggan.nama' },
+                { data: 'pelanggan.kode', name: 'pelanggan.kode' },
                 { data: 'pemakaian', name: 'pemakaian' },
                 { data: 'abonemen.level', name: 'abonemen.level' },
                 { data: 'harga_per_meter', name: 'harga_per_meter' },
@@ -150,10 +150,11 @@
                 { data: 'administrasi', name: 'administrasi', orderable: false, searchable: false },
                 { data: 'denda_keterlambatan', name: 'denda_keterlambatan' },
                 { data: 'tagihan', name: 'tagihan' },
-                { data: 'jenis_bayar', name: 'jenis_bayar' },
+                // { data: 'jenis_bayar', name: 'jenis_bayar' },
                 {
                     data: 'status',
-                    name: 'status', render: function(data, type, row) {
+                    name: 'status', orderable: false, searchable: false,
+                    render: function(data, type, row) {
                     if (data == 'PENDING') {
                         return '<span class="badge bg-warning status-editable" data-id="' + row.id + '" data-status="PENDING">PENDING</span>';
                     } else if (data === 'LUNAS') {
@@ -163,7 +164,7 @@
                     }
                 }
                 },
-                { data: 'action', name: 'action', orderable: false, searchable: false },
+                { data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
     });

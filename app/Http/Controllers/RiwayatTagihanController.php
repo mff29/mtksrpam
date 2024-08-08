@@ -17,7 +17,7 @@ class RiwayatTagihanController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            return DataTables::of(Tagihan::with('pelanggan','pemakaian','abonemen')->where('status','LUNAS')->get())
+            return DataTables::of(Tagihan::with('pelanggan','pemakaian','abonemen')->where('status','LUNAS')->orderBy('updated_at', 'desc')->get())
             ->addColumn('action', function($row){
                 $btn = "<a href='/tagihan/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'><i class='bi bi-printer-fill'></i></a>";
                 return $btn;

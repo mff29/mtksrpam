@@ -51,9 +51,8 @@ Route::get('/getAbonemenDetails/{abonemen_id}', function($abonemen_id) {
     ]);
 });
 
-// Route::post('/tagihan/update-status/{id}', 'App\Http\Controllers\TagihanController@updateStatus')->name('tagihan.updateStatus');
-// Route::put('/tagihan/{id}', [App\Http\Controllers\TagihanController::class, 'updateStatus'])->name('tagihan.updateStatus');
 Route::put('/tagihan/{id}', [App\Http\Controllers\TagihanController::class, 'updateStatus']);
+Route::get('/tagihan/{id}/pembayaran', [App\Http\Controllers\TagihanController::class, 'pembayaran']);
 Route::resource('/riwayat-tagihan', 'App\Http\Controllers\RiwayatTagihanController');
 
 Route::resource('/kas', 'App\Http\Controllers\KasController');

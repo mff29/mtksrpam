@@ -20,7 +20,8 @@ class TagihanController extends Controller
             return DataTables::of(Tagihan::with('pelanggan','pemakaian','abonemen')->where('status','PENDING')->get())
             ->addColumn('action', function($row){
                 // $btn = "<a href='/tagihan/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'>bayar<i class='fa fa-edit'></i></a>";
-                $btn = "<a href='/tagihan/" . $row->id . "/edit' class='btn btn-info btn-sm ' style='margin-right:5px'>bayar</a>";
+                // $btn = "<a href='/tagihan/" . $row->id . "/edit' class='btn btn-info btn-sm ' style='margin-right:5px'>bayar</a>";
+                $btn = "<a href='/tagihan/" . $row->id . "/pembayaran' class='btn bg-blue btn-sm '>BAYAR</a>";
                 // $btn .= '<button type="button" onclick="alert_delete(\'' . $row->id . '\')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
                 return $btn;
             })
@@ -187,5 +188,15 @@ class TagihanController extends Controller
         $tagihan->delete();
         
         return response()->json(['success' => 'Tagihan berhasil dihapus']);
+    }
+
+    public function pembayaran(string $id)
+    {
+        $data['pelanggans'] = Pelanggan::all();
+        $data['abonemens'] = Abonemen::all();
+        $data['pemakaians'] = Pemakaian::all();
+        $data['tagihan'] = Tagihan::findOrFail($id);
+        
+        return view('tagihan.pembayaran', $data);
     }
 }

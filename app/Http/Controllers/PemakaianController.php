@@ -21,7 +21,7 @@ class PemakaianController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            return DataTables::of(Pemakaian::with('pelanggan')->get())
+            return DataTables::of(Pemakaian::with('pelanggan')->orderBy('created_at', 'desc')->get())
             ->addColumn('action', function($row){
                 $btn = "<a href='/pemakaian/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'><i class='fa fa-edit'></i></a>";
                 $btn .= '<button type="button" onclick="alert_delete(\'' . $row->id . '\')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>';
