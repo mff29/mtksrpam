@@ -98,7 +98,7 @@
 <div class="form-group">
     {!! Form::label('status', 'Status', ['class'=>'col-sm-2 control-label']) !!}
     <div class="col-sm-4">
-        {!! Form::select('status', ['PENDING' => 'PENDING', 'LUNAS' => 'LUNAS'], old('status', $tagihan->status ?? ''), ['class' => 'form-control' . ($errors->has('status') ? ' is-invalid' : '')]) !!}
+        {!! Form::select('status', ['CEK' => 'CEK','PENDING' => 'PENDING', 'LUNAS' => 'LUNAS'], old('status', $tagihan->status ?? ''), ['class' => 'form-control' . ($errors->has('status') ? ' is-invalid' : '')]) !!}
         @error('status')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
