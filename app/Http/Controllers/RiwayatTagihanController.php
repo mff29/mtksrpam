@@ -7,6 +7,7 @@ use App\Models\Abonemen;
 use App\Models\Pelanggan;
 use App\Models\Pemakaian;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\RiwayatTagihanExport;
 use Yajra\DataTables\Facades\DataTables;
@@ -62,7 +63,11 @@ class RiwayatTagihanController extends Controller
     {
         $data['invoice'] = Tagihan::findOrFail($id);
 
-        return view('riwayat-tagihan.invoice',$data);
+        // Load view untuk PDF dan kirim data
+        $pdf = Pdf::loadView('riwayat-tagihan.invoice', $data)->setPaper('A5', 'landscape');
+
+        // Export dan unduh PDF
+        return $pdf->stream('laporan.pdf');
     }
 
     /**

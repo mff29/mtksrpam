@@ -6,11 +6,52 @@
      <meta http-equiv="X-UA-Compatible" content="ie=edge">
      <title>Invoice</title>
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+     <!-- Font Awesome Icons -->
+     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
+     <!-- IonIcons -->
+     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+     <!-- Theme style -->
+     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
+     {{-- DataTables --}}
+     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css" />
+     <script src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
+
+     <style>
+          .bordered-table {
+              width: 100%;
+              border-collapse: collapse; /* Menghindari double border */
+          }
+          
+          .bordered-table td, .bordered-table th {
+              border: 1px solid black;
+              padding: 8px;
+              text-align: left;
+          }
+          .text-end {
+            text-align: right;
+        }
+      </style>
 </head>
 <body>
      <h1>INVOICE</h1>
      <span>tgl : {{ \Carbon\Carbon::now()->translatedFormat('l, d F Y H:i:s') }}</span>
-     <table>
+     <table class="bordered-table">
+          <tr>
+               <td rowspan="2">Logo</td>
+               <td>Judul</td>
+               <td rowspan="2">Logo</td>
+          </tr>
+          <tr>
+               <td>Alamat dan no hp</td>
+          </tr>
+     </table>
+
+     <div class="hr">batas</div>
+
+     <table width="100%">
           <tr>
                <td>Nama Pelanggan</td>
                <td>:</td>
@@ -66,7 +107,7 @@
           </tr>
      </table>
 
-
+     <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
      <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
