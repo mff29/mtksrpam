@@ -21,7 +21,7 @@ class RiwayatTagihanController extends Controller
         if($request->ajax()){
             return DataTables::of(Tagihan::with('pelanggan','pemakaian','abonemen')->where('status','LUNAS')->orderBy('updated_at', 'desc')->get())
             ->addColumn('action', function($row){
-                $btn = "<a href='/tagihan/" . $row->id . "/edit' class='btn btn-danger btn-sm ' style='margin-right:5px'><i class='bi bi-printer-fill'></i></a>";
+                $btn = "<a href='/riwayat-tagihan/invoice/" . $row->id . "' class='btn btn-danger btn-sm ' style='margin-right:5px'><i class='bi bi-printer-fill'></i></a>";
                 return $btn;
             })
             ->addColumn('pemakaian', function ($row) {
@@ -57,6 +57,12 @@ class RiwayatTagihanController extends Controller
     public function show(string $id)
     {
         //
+    }
+    public function cetak_invoice(string $id)
+    {
+        $data['invoice'] = Tagihan::findOrFail($id);
+
+        return view('riwayat-tagihan.invoice',$data);
     }
 
     /**

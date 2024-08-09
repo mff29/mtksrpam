@@ -56,6 +56,7 @@ Route::put('/tagihan/{id}', [App\Http\Controllers\TagihanController::class, 'upd
 Route::get('/tagihan/{id}/pembayaran', [App\Http\Controllers\TagihanController::class, 'pembayaran']);
 
 Route::get('/riwayat-tagihan/export-excel', [App\Http\Controllers\RiwayatTagihanController::class, 'export_excel']);
+Route::get('/riwayat-tagihan/invoice/{id}', [App\Http\Controllers\RiwayatTagihanController::class, 'cetak_invoice']);
 Route::resource('/riwayat-tagihan', 'App\Http\Controllers\RiwayatTagihanController');
 
 Route::resource('/kas', 'App\Http\Controllers\KasController');
